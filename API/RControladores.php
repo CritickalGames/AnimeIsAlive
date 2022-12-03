@@ -1,3 +1,3 @@
 <?php 
-	require_once "CONTROLADORES/RequireControladores.php";
+	require_once "../../CONTROLADORES/RequireControladores.php";
 ?>

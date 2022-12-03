@@ -31,12 +31,13 @@ class ModeloAnime extends ModeloConexion
 ///////////////////Get
     public function getByInicial($Inicial){
         $tabla = self::tabla;
-        return $this->sqlGetByLike($tabla, "nombre","$Inicial%");
+        return $this->sqlGetByLike($tabla, "nombre", "$Inicial%");
     }
     public function getByNombre($Nombre){
         $tabla = self::tabla;
-        return $this->sqlGetBy($tabla, "nombre",$Nombre);
+        return $this->sqlGetBy($tabla, "nombre", $Nombre);
     }
+///////////////////Group
 ///////////////////////////////
     public function get_ALL(){
         $tabla = self::tabla;

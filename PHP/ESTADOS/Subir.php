@@ -14,8 +14,9 @@ require_once "../USER/Admin.php";
     $estado = $_POST['estado'];
 
     if (($nombre!= NULL)&&($temporada!= NULL)) {
-        if ($capitulo=="0") {
+        if ($capitulo=="0"||$capitulo=="") {
             $estado="ver";
+            $capitulo="0";
         }elseif(intval($temporada)==0){
             $estado="ver pelicula";
         }elseif (intval($capitulo)>0) {
@@ -30,11 +31,11 @@ require_once "../USER/Admin.php";
         echo "\n";
 
         if (($obj->getEstadosByID($nombre, $temporada)[0])!=0) {
-            echo "ENTRA";
+            echo "Hay una temporada";
             echo ($obj->editarEstadosCapitulo($nombre, $temporada, $capitulo));
             ($obj->editarEstadosEstado($nombre, $temporada, $estado));
         }elseif(!($obj->getEstadosByID($nombre, $temporada)[0])) {
-            echo "¿ENTRA?";
+            echo "<br>No hay ninguna temporada";
             $obj->subirEstados($nombre, $temporada, $capitulo, $estado);
         }else{
             echo "La clave está bien, pero nada más";

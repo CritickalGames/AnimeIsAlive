@@ -37,8 +37,8 @@ class ModeloConexion
       return $row=[mysqli_num_rows($result)];
     }
   }
-
-  function colTOatr($columnas, ... $atr){
+////////////////////////////////////////////////
+  function colTOatr(string $columnas, ... $atr){
     $col= str_word_count($columnas, 1);
     $clave= "";
     foreach ($atr as $key => $value) {
@@ -54,13 +54,13 @@ class ModeloConexion
     return $clave;
   }
 
-  public function sqlBorrar($tabla, $columna, ... $atr){
+  public function sqlBorrar(string $tabla, string $columna, ... $atr){
       $clave = $this->colTOatr($columna, $atr);
     $sql = "DELETE FROM $tabla WHERE $clave";
     return $this->sentencia($sql);
   }
 
-  public function sqlBuscar($tabla, $columna, $Name){
+  public function sqlBuscar(string $tabla, string $columna, string $Name){
         $sql="SELECT * FROM $tabla WHERE $columna LIKE '$Name'";
         return $this->get($sql);
   }
@@ -71,23 +71,38 @@ class ModeloConexion
     return mysqli_num_rows($result);
   }
 
-  public function sqlGet($tabla){
+  public function sqlEditar(string $tabla, string $columna, string $atr, string $columnas, ... $atributos){
+    $clave = $this->colTOatr($columnas, $atr);
+    $sql = "UPDATE $tabla 
+        SET $columna='$atr' 
+        WHERE $clave ";
+        return $this->sentencia($sql);
+  }
+
+  public function sqlGet(string $tabla){
     $sql="SELECT * FROM $tabla";
     return $this->get($sql);
   }
 
-  public function sqlGetBy($tabla, $columna, $Nombre){
-        $sql="SELECT * FROM $tabla WHERE $columna = '$Nombre'";
+  public function sqlGetBy(string $tabla, string $columna, string $atr){
+        $sql="SELECT * FROM $tabla WHERE $columna = '$atr'";
         return $this->get($sql);
   }
 
-  public function sqlGetByLike($tabla, $columna, $Inicial){
-        $sql="SELECT * FROM $tabla WHERE $columna LIKE '$Inicial'";
+  public function sqlGetByLike(string $tabla, string $columna, string $atr){
+        $sql="SELECT * FROM $tabla WHERE $columna LIKE '$atr'";
+        return $this->get($sql);
+  }
+
+  public function sqlGetByClave(string $tabla, string $columna, ...$atr){
+        $clave = $this->colTOatr($columna, $atr);
+        $sql="SELECT * FROM $tabla WHERE $clave";
         return $this->get($sql);
   }
   
-  public function sqlSet($tabla, $columna, $NAME){
-        $sql = "INSERT INTO anime ($columna) 
+  public function sqlSet(string $tabla, string $columna, string $NAME){
+        echo "<br>-set Conexión-";
+        $sql = "INSERT INTO $tabla (nombre, temporada, Capitulo, Estado) 
             VALUES ($NAME)";
     return $this->sentencia($sql);
   }

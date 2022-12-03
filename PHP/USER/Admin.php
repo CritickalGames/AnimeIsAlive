@@ -102,8 +102,8 @@ class UserAdmin{
 ///////////////////Subir
     function subirEstados($nombre,$temporada,$capitulo,$estado ){
         $obj = new Backoffice ();
-        
-        $obj->subir("ESTADOS", ["$nombre","$temporada","$capitulo","$estado"]);
+        echo "<br>-admin subir estado-";
+        $obj->subir("ESTADOS", [$nombre, $temporada, $capitulo, $estado]);
     }
 /////////////////////////
     function contarEstados(){

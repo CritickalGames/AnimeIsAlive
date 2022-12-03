@@ -5,44 +5,46 @@ require_once "MConexion.php";
 
 class ModeloEstados extends ModeloConexion
 {
+    const tabla="Estados";
+
     public function set($nombre, $temporada, $Capitulo, $Estados)
     {
-        $sql = "INSERT INTO Estados (nombre, temporada, Capitulo, Estado) 
-            VALUES ('$nombre', '$temporada', '$Capitulo', '$Estados')";
-        $this->sentencia($sql);
+        echo "<br>-setEstados Modelo-";
+        $tabla = self::tabla;
+        return $this->sqlSet($tabla, "nombre, temporada, Capitulo, Estado", 
+            /*Value*/        "'$nombre', '$temporada', '$Capitulo', '$Estados'");
     }
 ///////////////////Borrar
-    public function borrar($nombre){
-        $sql = "DELETE FROM Estados WHERE nombre='$nombre'";
-        $this->sentencia($sql);
+    public function borrar($atr){
+        $tabla = self::tabla;
+        return $this->sqlBorrar($tabla, "nombre",
+                                $atr);
     }
 ///////////////////Search
-    public function buscar($Name){
-        $sql="SELECT * FROM Estados WHERE nombre LIKE '%$Name%'";
-        return $this->get($sql);
+    public function buscar($atr){
+        $tabla = self::tabla;
+        return $this->sqlBuscar($tabla, "nombre", "%$atr%");
     }
 ///////////////////Edit
     public function editarCapitulo($nombre, $temporada, $ATR){
-        $sql = "UPDATE Estados 
-        SET capitulo='$ATR' 
-        WHERE nombre='$nombre' AND temporada='$temporada' ";
-        return "-ENTRA".$this->sentencia($sql);
+        $tabla = self::tabla;
+        $clave= "nombre, temporada";
+        return $this->sqlEditar($tabla, "capitulo", $ATR, $clave, $nombre, $temporada);
     }
 
     public function editarEstado($nombre, $temporada, $ATR){
-        $sql = "UPDATE Estados
-        SET estado='$ATR' 
-        WHERE nombre='$nombre' AND temporada='$temporada'";
-        $this->sentencia($sql);
+        $tabla = self::tabla;
+        $clave= "nombre, temporada";
+        return $this->sqlEditar($tabla, "estado", $ATR, $clave, $nombre, $temporada);
     }
 ///////////////////Get
     public function getByNombre($nombre){
-        $sql="SELECT * from Estados where nombre='$nombre'";
-        return $this->get($sql);
+        $tabla = self::tabla;
+        return $this->sqlGetBy($tabla, "nombre", $nombre);
     }
     public function getByID($nombre, $temporada){
-        $sql="SELECT * from Estados where nombre='$nombre' AND temporada='$temporada'";
-        return $this->get($sql);
+        $tabla = self::tabla;
+        return $this->sqlGetByClave($tabla, "nombre, temporada", $nombre, $temporada);
     }
 ///////////////////Group
     public function groupForTemporadaByNombre($nombre){
@@ -56,7 +58,7 @@ class ModeloEstados extends ModeloConexion
         )";
         return $this->get($sql);
     }
-    public function groupForTemporadaByATRNombre(){
+    public function groupForTemporadaByCOLNombre(){
         $sql="SELECT * FROM estados e
         WHERE EXISTS(
             SELECT nombre, max(temporada) AS temporada, capitulo, estado FROM estados
@@ -68,22 +70,12 @@ class ModeloEstados extends ModeloConexion
     }
 ///////////////////////////////
     public function get_ALL(){
-        $sql="SELECT * from Estados";
-        return $this->get($sql);
-    }
-
-    public function get_ALL_Where(string $where){
-        $sql="SELECT * from Estados WHERE $where";
-        return $this->get($sql);
+        $tabla = self::tabla;
+        return $this->sqlGet($tabla);
     }
 
     public function contar(){
         $sql="SELECT * from Estados";
-        return $this->count($sql);
-    }
-
-    public function contarWhere(string $where){
-        $sql="SELECT * from Estados WHERE $where";
         return $this->count($sql);
     }
 }

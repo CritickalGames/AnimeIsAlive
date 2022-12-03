@@ -1,17 +1,23 @@
 <?php
-require("PHP/USER/Admin.php");
+//require("PHP/USER/Admin.php");
 
-$objAdmin               = new UserAdmin();
-$objControladorAnime    = new ControladorAnime();
-$objModeloAnime         = new ModeloAnime();
-$objModeloConexion      = new ModeloConexion();
+//$objAdmin               = new UserAdmin();
+//$objControladorAnime    = new ControladorAnime();
+//$objModeloAnime         = new ModeloAnime();
+//$objModeloConexion      = new ModeloConexion();
 
 
-echo($objAdmin->borrarAnime("Z"));
-//echo($objModeloConexion->colTOatr("z, j, a, b, c", "tetas", "quiero", "YO"));
+
 
 ?>
-<form action="PHP/ANIME/BuscarNombre.php?nombre=a" method="post">
-    <input type="text" name="nombre">
-    <button type="submit">Pulsa</button>
+<form action="PHP/ANIME/BuscarNombre.php" method="post">
+    <input type="text" name="nombre" placeholder="nombre">
+    <button type="submit">buscar por nombre</button>
+</form>
+<form action="PHP/ESTADOS/Subir.php" method="post">
+    <input type="text" name="nombre" placeholder="nombre">
+    <input type="text" name="temporada" placeholder="temporada">
+    <input type="text" name="capitulo" placeholder="capitulo">
+    <input type="text" name="estado" placeholder="estado">
+    <button type="submit">subir capitulo</button>
 </form>
