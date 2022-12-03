@@ -1,5 +1,5 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../../PHP/USER/Comun.php";
     $objUserAdmin = new UserAdmin();
 
     echo json_encode($objUserAdmin->contarAnime());

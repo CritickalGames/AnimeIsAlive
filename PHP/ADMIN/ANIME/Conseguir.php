@@ -1,5 +1,5 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../../PHP/USER/Comun.php";
 $objUserAdmin = new UserAdmin();
 
 $nombre = $_POST['nombre'];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2022 a las 06:05:58
+-- Tiempo de generación: 03-12-2022 a las 03:41:10
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -70,6 +70,7 @@ INSERT INTO `anime` (`nombre`) VALUES
 ('Dr stone Stone Wars'),
 ('Eighty Six-86'),
 ('El Mundo de Narue'),
+('El Zorro: Serie Animada'),
 ('Encanto'),
 ('Ero manga sensei'),
 ('Eyeshield 21'),
@@ -79,6 +80,7 @@ INSERT INTO `anime` (`nombre`) VALUES
 ('Gamers!'),
 ('Gate: Jieitai Kanochi nite, Kaku Tatakaeri'),
 ('Gekkan shoujo nozaki kun'),
+('Generador Rex'),
 ('Genjitsu Shugi Yuusha no Oukoku Saikenki'),
 ('Girl Bravo'),
 ('Gleipnir'),
@@ -128,6 +130,7 @@ INSERT INTO `anime` (`nombre`) VALUES
 ('Mahoutsukai Reimeiki'),
 ('Masamue kun\'s revege'),
 ('Mashita iruma kun'),
+('Meteoro: La Nueva Generación'),
 ('Mieru ko-chan'),
 ('Mob psycho 100'),
 ('Moyashimon'),
@@ -173,6 +176,7 @@ INSERT INTO `anime` (`nombre`) VALUES
 ('Tantei wa Mou, Shindeiru'),
 ('Tate no yuusha'),
 ('The owl house'),
+('Thundercats 2011'),
 ('Tokyo Revengers'),
 ('Tonikaku kawaii'),
 ('Tsugumomo'),
@@ -183,8 +187,7 @@ INSERT INTO `anime` (`nombre`) VALUES
 ('Yatogame-chan Kansatsu Nikki'),
 ('Yofukashi no uta'),
 ('Youjo senki'),
-('Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e'),
-('znombreSUBIR');
+('Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e');
 
 -- --------------------------------------------------------
 
@@ -223,7 +226,7 @@ ALTER TABLE `estados`
 -- Filtros para la tabla `estados`
 --
 ALTER TABLE `estados`
-  ADD CONSTRAINT `fk_Nombre_Anime` FOREIGN KEY (`nombre`) REFERENCES `anime` (`nombre`);
+  ADD CONSTRAINT `fk_Nombre_Estados` FOREIGN KEY (`nombre`) REFERENCES `anime` (`nombre`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
