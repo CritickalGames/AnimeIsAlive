@@ -353,7 +353,7 @@ function SubirAnime(valores) {
         data:{nombre:valores[1]},
         //dataType: "json",
         success:function(res){
-            //alert(res);
+            alert(res);
             actualizarLista();
         }
     });
