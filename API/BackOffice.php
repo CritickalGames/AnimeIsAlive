@@ -14,8 +14,7 @@ class Backoffice{
                 $by = "agrupar".$valores[0];
                 return ($obj->{$by}($valores[1]));
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
                 break;
         }
     }
@@ -33,8 +32,10 @@ class Backoffice{
                 $by = "buscarEstadosBy".$valores[0];
                 return ($obj->{$by}($valores[1]));
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                $by = "buscarDatosBy".$valores[0];
+                return ($obj->{$by}($valores[1]));
                 break;
         }
     }
@@ -53,8 +54,10 @@ class Backoffice{
                     $valores[0],
                     $valores[1]);
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                $obj->borrarDatos(
+                        $valores[0]);
                 break;
         }
     }
@@ -70,8 +73,9 @@ class Backoffice{
                 $obj = new ControladorEstados();
                 return $obj->contarEstados();
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                return $obj->contarDatos();
                 break;
         }
         
@@ -93,8 +97,11 @@ class Backoffice{
                     $valores[1],
                     $valores[2]));
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                $by = "getDatosBy".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1]));
                 break;
         }
         
@@ -114,8 +121,12 @@ class Backoffice{
                         $valores[2],
                         $valores[3]));
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                $by = "editarDatos".$valores[0];
+                return ($obj->{$by}(
+                        $valores[1],
+                        $valores[2]));
                 break;
         }
     }
@@ -133,8 +144,10 @@ class Backoffice{
                 $by = "listarEstadoBy".$valores[0];
                 return ($obj->{$by}($valores[1]));
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                $by = "listarDatosBy".$valores[0];
+                return ($obj->{$by}($valores[1]));
                 break;
         }
         
@@ -154,8 +167,13 @@ class Backoffice{
                     $valores[2],
                     $valores[3]));
                 break;
-            case "stado":
-                echo "i es igual a 2";
+            case "datos":
+                $obj = new ControladorDatos();
+                ($obj->setDatos(
+                    $valores[0],
+                    $valores[1],
+                    $valores[2],
+                    $valores[3]));
                 break;
         }
     }

@@ -2,119 +2,88 @@
 require_once "RAPIs.php";
 
 class UserAdmin{
-////////ANIME/////////////////////////////////////////
+/////////DATOS//////////////////////////
+const swDatos= "DATOS";
 ///////////////////Borrar
-        function borrarAnime($nombre){
-            $obj = new Backoffice ();
-            return $obj->borrar("ANIME", [$nombre]);
-        }
-///////////////////Search
-        function buscarAnimeNombre($name){
-            $obj = new Backoffice ();
-            return $obj->buscar("ANIME", ["Nombre",$name]);
-        }
-        function buscarAnimeAll($name){
-            $obj = new Backoffice ();
-            return $obj->buscar("ANIME", ["All",$name]);
-        }
-///////////////////Edit
-
-///////////////////Get
-        function getAnimeByNombre($name){
-            $obj = new Backoffice ();
-            return $obj->conseguir("ANIME", ["Nombre",$name]);
-        }
-///////////////////Group
-///////////////////Listar
-        function listarAnime(){
-            $obj = new Backoffice ();
-            return $obj->listar("ANIME", ["All", "ALL"]);
-        }
-        function listarAnimePorInicial($nombre){
-            $obj = new Backoffice ();
-            return $obj->listar("ANIME", ["inicial", $nombre]);
-        }
-///////////////////Subir
-        function subirAnime($nombre ){
-            $obj = new Backoffice ();
-            
-            $obj->subir("ANIME", ["$nombre"]);
-        }
-/////////////////////////
-        function contarAnime(){
-            $obj = new Backoffice ();
-            return $obj->contar("ANIME");
-        }
-
-        
-/////////ESTADOS//////////////////////////
-///////////////////Borrar
-    function borrarEstados($nombre){
+    function borrarDatos($nombre){
         $obj = new Backoffice ();
-        return $obj->borrar("ESTADOS", [$nombre]);
+        $swDatos = self::swDatos;
+        return $obj->borrar($swDatos, [$nombre]);
     }
 ///////////////////Search
-    function buscarEstados($name){
+    function buscarDatos($name){
         $obj = new Backoffice ();
-        return $obj->buscar("ESTADOS", [$name]);
+        $swDatos = self::swDatos;
+        return $obj->buscar($swDatos, [$name]);
     }
 ///////////////////Edit
-    function editarEstadosCapitulo($nombre, $temporada, $ATR){
+    function editarDatosCapitulo($nombre, $temporada, $ATR){
         $obj = new Backoffice ();
-        return $obj->editar("ESTADOS", ["Capitulo",$nombre, $temporada, $ATR]);
+        $swDatos = self::swDatos;
+        return $obj->editar($swDatos, ["Capitulo",$nombre, $temporada, $ATR]);
     }
-    function editarEstadosEstado($nombre, $Temperatura, $ATR){
+    function editarDatosEstado($nombre, $Temperatura, $ATR){
         $obj = new Backoffice ();
-        return $obj->editar("ESTADOS", ["Estado",$nombre, $Temperatura, $ATR]);
+        $swDatos = self::swDatos;
+        return $obj->editar($swDatos, ["Estado",$nombre, $Temperatura, $ATR]);
     }
 ///////////////////Get
-        function getEstadosByNombre($name){
+        function getDatosByNombre($name){
             $obj = new Backoffice ();
-            return $obj->conseguir("ESTADOS", ["Nombre",$name, "ALL"]);
+        $swDatos = self::swDatos;
+            return $obj->conseguir($swDatos, ["Nombre",$name, "ALL"]);
         }
-        function getEstadosByID($nombre, $temporada){
+        function getDatosByID($nombre, $temporada){
             $obj = new Backoffice ();
-            return $obj->conseguir("ESTADOS", ["ID",$nombre, $temporada]);
+        $swDatos = self::swDatos;
+            return $obj->conseguir($swDatos, ["ID",$nombre, $temporada]);
         }
 ///////////////////Group
-    function agruparEstadosForTemporadaByNombre($nombre){
+    function agruparDatosForTemporadaByNombre($nombre){
         $obj = new Backoffice ();
-        return $obj->agrupar("ESTADOS", ["ForTemporadaByNombre", $nombre]);
+        $swDatos = self::swDatos;
+        return $obj->agrupar($swDatos, ["ForTemporadaByNombre", $nombre]);
     }
-    function agruparEstadosForTemporadaByATRNombre(){
+    function agruparDatosForTemporadaByATRNombre(){
         $obj = new Backoffice ();
-        return $obj->agrupar("ESTADOS", ["ForTemporadaByATRNombre", "ALL"]);
+        $swDatos = self::swDatos;
+        return $obj->agrupar($swDatos, ["ForTemporadaByATRNombre", "ALL"]);
     }
-    function agruparEstadosForTemporadaByInicial($nombre){
+    function agruparDatosForTemporadaByInicial($nombre){
         $obj = new Backoffice ();
-        return $obj->agrupar("ESTADOS", ["ForTemporadaByNombre", $nombre]);
+        $swDatos = self::swDatos;
+        return $obj->agrupar($swDatos, ["ForTemporadaByNombre", $nombre]);
     }
 ///////////////////Listar
-    function listarEstados(){
+    function listarDatos(){
         $obj = new Backoffice ();
-        return $obj->listar("ESTADOS", ["All", "ALL"]);
+        $swDatos = self::swDatos;
+        return $obj->listar($swDatos, ["All", "ALL"]);
     }
 
-    function listarEstadosPorNombre($nombre){
+    function listarDatosPorNombre($nombre){
         $obj = new Backoffice ();
-        return $obj->listar("ESTADOS", ["nombre", $nombre]);
+        $swDatos = self::swDatos;
+        return $obj->listar($swDatos, ["nombre", $nombre]);
     }
 ///////////////////Subir
-    function subirEstados($nombre,$temporada,$capitulo,$estado ){
+    function subirDatos($nombre,$temporada,$capitulo,$estado ){
         $obj = new Backoffice ();
         echo "<br>-admin subir estado-";
-        $obj->subir("ESTADOS", [$nombre, $temporada, $capitulo, $estado]);
+        $swDatos = self::swDatos;
+        $obj->subir($swDatos, [$nombre, $temporada, $capitulo, $estado]);
     }
 /////////////////////////
-    function contarEstados(){
+    function contarDatos(){
         $obj = new Backoffice ();
-        return $obj->contar("ESTADOS");
+        $swDatos = self::swDatos;
+        return $obj->contar($swDatos);
     }
 
 }
 
 //$obj = new UserAdmin();
 
-//$obj->editarEstadosCapitulo("z",1,7);
+//$obj->editarDatosCapitulo("z",1,7);
 
 ?>

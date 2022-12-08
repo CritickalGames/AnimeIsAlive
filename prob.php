@@ -10,14 +10,9 @@
 
 
 ?>
-<form action="PHP/COMUN/ANIME/BuscarNombre.php" method="post">
-    <input type="text" name="nombre" placeholder="nombre">
+
+
+<form action="PHP/COMUN/DATOS/Listar.php" method="post">
+    
     <button type="submit">buscar por nombre</button>
-</form>
-<form action="PHP/COMUN/ESTADOS/Subir.php" method="post">
-    <input type="text" name="nombre" placeholder="nombre">
-    <input type="text" name="temporada" placeholder="temporada">
-    <input type="text" name="capitulo" placeholder="capitulo">
-    <input type="text" name="estado" placeholder="estado">
-    <button type="submit">subir capitulo</button>
 </form>

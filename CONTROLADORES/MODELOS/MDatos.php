@@ -3,13 +3,14 @@
 require_once "MConexion.php";
 
 
-class ModeloEstados extends ModeloConexion
+class ModeloDatos extends ModeloConexion
 {
     const tabla="datos";
+    const nombreDeClave="telefono";
 
     public function set($telefono, $nombre, $apellido, $fechnac)
     {
-        echo "<br>-setEstados Modelo-";
+        echo "<br>-setDatos Modelo-";
         $tabla = self::tabla;
         return $this->sqlSet($tabla, "telefono, nombre, apellido, fechnac", 
             /*Value*/        "'$telefono', '$nombre', '$apellido', '$fechnac'");
@@ -33,52 +34,41 @@ class ModeloEstados extends ModeloConexion
 ///////////////////Edit
     public function editarNombre($telefono, $ATR){
         $tabla = self::tabla;
-        $nombreDeClave= "telefono";
+        $nombreDeClave= self::nombreDeClave;
         return $this->sqlEditar($tabla, "nombre", $ATR, $nombreDeClave, $telefono);
     }
 
     public function editarApellido($telefono, $ATR){
         $tabla = self::tabla;
-        $nombreDeClave= "telefono";
+        $nombreDeClave= self::nombreDeClave;
         return $this->sqlEditar($tabla, "apellido", $ATR, $nombreDeClave, $telefono);
     }
 
-    public function editarFecha($telefono, $ATR){
+    public function editarFechaNacimiento($telefono, $ATR){
         $tabla = self::tabla;
-        $nombreDeClave= "telefono";
-        return $this->sqlEditar($tabla, "apellido", $ATR, $nombreDeClave, $telefono);
+        $nombreDeClave= self::nombreDeClave;
+        return $this->sqlEditar($tabla, "fechanac", $ATR, $nombreDeClave, $telefono);
     }
 ///////////////////Get
-    public function getByNombre($nombre){
+    public function getByNombre($ATR){
         $tabla = self::tabla;
-        return $this->sqlGetBy($tabla, "nombre", $nombre);
+        return $this->sqlGetBy($tabla, "nombre", $ATR);
     }
-    public function getByID($nombre, $temporada){
+    public function getByApellido($ATR){
         $tabla = self::tabla;
-        return $this->sqlGetByClave($tabla, "nombre, temporada", $nombre, $temporada);
+        return $this->sqlGetBy($tabla, "apellido", $ATR);
+    }
+    public function getByFechaNacimiento($ATR){
+        $tabla = self::tabla;
+        return $this->sqlGetBy($tabla, "fechanac", $ATR);
+    }
+    public function getByID($telefono){
+        $tabla = self::tabla;
+        $nombreDeClave= self::nombreDeClave;
+        return $this->sqlGetByClave($tabla, $nombreDeClave, $telefono);
     }
 ///////////////////Group
-    public function groupForTemporadaByNombre($nombre){
-        $sql="SELECT * FROM estados e
-        WHERE EXISTS(
-            SELECT nombre, max(temporada) AS temporada, capitulo, estado FROM estados
-            WHERE nombre LIKE '$nombre%' AND 
-                e.nombre= nombre
-            GROUP BY nombre
-            HAVING e.temporada= temporada
-        )";
-        return $this->get($sql);
-    }
-    public function groupForTemporadaByCOLNombre(){
-        $sql="SELECT * FROM estados e
-        WHERE EXISTS(
-            SELECT nombre, max(temporada) AS temporada, capitulo, estado FROM estados
-            WHERE e.nombre= nombre
-            GROUP BY nombre
-            HAVING e.temporada= temporada
-        )";
-        return $this->get($sql);
-    }
+
 ///////////////////////////////
     public function get_ALL(){
         $tabla = self::tabla;

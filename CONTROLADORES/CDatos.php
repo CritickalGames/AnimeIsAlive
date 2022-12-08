@@ -2,62 +2,71 @@
 
 require_once "RModelos.php";
 
-class ControladorEstados extends ModeloEstados
+class ControladorDatos extends ModeloDatos
 {
 
-    public function setEstados($nombre, $temporada, $cap, $estado){
-        echo "<br>-setEstados Controlador-";
-        $this->set($nombre, $temporada, $cap, $estado);
+    public function setDatos($telefono, $nombre, $apellido, $fechnac){
+        echo "<br>-setDatos Controlador-";
+        $this->set($telefono, $nombre, $apellido, $fechnac);
     }
 ///////////////////Borrar
-    public function borrarEstados($nombre){
-        $this->borrar($nombre);
+    public function borrarDatos($telefono){
+        $this->borrar($telefono);
     }
 ///////////////////Search
-    public function buscarEstadosByNombre($Atributo){
-        return $this->buscar($Atributo);
+    public function buscarDatosByNombre($Atributo){
+        return $this->buscarPorNombre($Atributo);
+    }
+    public function buscarDatosByApellido($Atributo){
+        return $this->buscarPorApellido($Atributo);
     }
 ///////////////////Edit
-    public function editarEstadosEstado($nombre, $temporada, $ATR){
-        $this->editarEstado($nombre, $temporada, $ATR);
+    public function editarDatosNombre($telefono, $ATR){
+        $this->editarNombre($telefono, $ATR);
     }
-    public function editarEstadosCapitulo($nombre, $temporada, $ATR){
+    public function editarDatosApellido($telefono, $ATR){
         
-        return "-ENTRÓ".$this->editarCapitulo($nombre, $temporada, $ATR);
+        return "-ENTRÓ".$this->editarApellido($telefono, $ATR);
+    }
+    public function editarDatosFecha($telefono, $ATR){
+        
+        return "-ENTRÓ".$this->editarFecha($telefono, $ATR);
     }
 ///////////////////Get
-    public function getEstadosByNombre($nombre){
+    public function getDatosByNombre($nombre){
         return $this->getByNombre($nombre);
     }
-    public function getEstadosByID($nombre, $temporada){
-        return $this->getByID($nombre, $temporada);
+    public function getDatosByApellido($Apellido){
+        return $this->getByApellido($Apellido);
+    }
+    public function getDatosByFechaNacimiento($Fecha){
+        return $this->getByFechaNacimiento($Fecha);
+    }
+
+    public function getDatosByID($telefono){
+        return $this->getByID($telefono);
     }
 ///////////////////Group
-    public function agruparForTemporadaByNombre($nombre){
-        return $this->groupForTemporadaByNombre($nombre);
-    }
-    public function agruparForTemporadaByATRNombre(){
-        return $this->groupForTemporadaByATRNombre();
-    }
+
 ///////////////////Listar
-    public function listarEstadosByAll(){
+    public function listarDatosByAll(){
         return $this->get_All();
     }
 
-    public function listarEstadosByNombre($Atributo){
-        return $this->getByAtributo($Atributo);
+    public function listarDatosByNombre($Atributo){
+        return $this->getByNombre($Atributo);
     }
 
-    public function listarEstadosWhere(string $where){
+    public function listarDatosWhere(string $where){
         return $this->get_All_Where($where);
     }
 ///////////////////////////////
-    public function contarEstados(){
+    public function contarDatos(){
         return $this->contar();
     }
 }
-//$obj = new ControladorEstados();
+//$obj = new ControladorDatos();
 
-//$obj->editarEstadosCapitulo("z",1,3);
+//$obj->editarDatosCapitulo("z",1,3);
 
 ?>
