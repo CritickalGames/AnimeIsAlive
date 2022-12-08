@@ -5,37 +5,48 @@ require_once "MConexion.php";
 
 class ModeloEstados extends ModeloConexion
 {
-    const tabla="Estados";
+    const tabla="datos";
 
-    public function set($nombre, $temporada, $Capitulo, $Estados)
+    public function set($telefono, $nombre, $apellido, $fechnac)
     {
         echo "<br>-setEstados Modelo-";
         $tabla = self::tabla;
-        return $this->sqlSet($tabla, "nombre, temporada, Capitulo, Estado", 
-            /*Value*/        "'$nombre', '$temporada', '$Capitulo', '$Estados'");
+        return $this->sqlSet($tabla, "telefono, nombre, apellido, fechnac", 
+            /*Value*/        "'$telefono', '$nombre', '$apellido', '$fechnac'");
     }
 ///////////////////Borrar
     public function borrar($atr){
         $tabla = self::tabla;
-        return $this->sqlBorrar($tabla, "nombre",
+        return $this->sqlBorrar($tabla, "telefono",
                                 $atr);
     }
 ///////////////////Search
-    public function buscar($atr){
+    public function buscarPorNombre($atr){
         $tabla = self::tabla;
         return $this->sqlBuscar($tabla, "nombre", "%$atr%");
     }
-///////////////////Edit
-    public function editarCapitulo($nombre, $temporada, $ATR){
+
+    public function buscarPorApellido($atr){
         $tabla = self::tabla;
-        $clave= "nombre, temporada";
-        return $this->sqlEditar($tabla, "capitulo", $ATR, $clave, $nombre, $temporada);
+        return $this->sqlBuscar($tabla, "apellido", "%$atr%");
+    }
+///////////////////Edit
+    public function editarNombre($telefono, $ATR){
+        $tabla = self::tabla;
+        $nombreDeClave= "telefono";
+        return $this->sqlEditar($tabla, "nombre", $ATR, $nombreDeClave, $telefono);
     }
 
-    public function editarEstado($nombre, $temporada, $ATR){
+    public function editarApellido($telefono, $ATR){
         $tabla = self::tabla;
-        $clave= "nombre, temporada";
-        return $this->sqlEditar($tabla, "estado", $ATR, $clave, $nombre, $temporada);
+        $nombreDeClave= "telefono";
+        return $this->sqlEditar($tabla, "apellido", $ATR, $nombreDeClave, $telefono);
+    }
+
+    public function editarFecha($telefono, $ATR){
+        $tabla = self::tabla;
+        $nombreDeClave= "telefono";
+        return $this->sqlEditar($tabla, "apellido", $ATR, $nombreDeClave, $telefono);
     }
 ///////////////////Get
     public function getByNombre($nombre){
