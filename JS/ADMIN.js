@@ -33,83 +33,52 @@ function select() {
     btn.text(select);
 
     $("#btn").prop('disabled', false);
+    $("#telefono").prop('disabled', false).attr("placeholder", "Telefono");
     $("#nombre").prop('disabled', false).attr("placeholder", "Nombre");
     $("#apellido").prop('disabled', false).attr("placeholder", "Apellido");
-    $("#telefono").prop('disabled', false).attr("placeholder", "Telefono");
     $("#fechanac").prop('disabled', false);
 
     switch (select) {
         case "Subir":
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
         break;
         case "Borrar":
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
+            $("#nombre").prop('disabled', true);
+            $("#apellido").prop('disabled', true);
+            $("#fechanac").prop('disabled', true);
         break;
         case "Buscar":
             $("#btn").prop('disabled', true);
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
+            $("#nombre").prop('disabled', true);
+            $("#apellido").prop('disabled', true);
+            $("#fechanac").prop('disabled', true);
         break;
         case "Editar":
-            $("#btn").prop('disabled', true);
-            $("#nombre").prop('disabled', true);
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
         break;
         case "Listar":
             Listar([]);
             $("#btn").prop('disabled', true);
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Inicial":
-            actualizarLista();
-
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Contar":
-            Contar([]);
-            $("#btn").prop('disabled', true);
+            $("#telefono").prop('disabled', true);
             $("#nombre").prop('disabled', true);
-            $("#temporada").prop('disabled', true);
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
+            $("#apellido").prop('disabled', true);
+            $("#fechanac").prop('disabled', true);
         break;
-        case "Editar ":
-            $("#capitulo").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Nuevo Capitulo":
-            $("#opinon").prop('disabled', true);
-        break;
-    
         default:
             break;
     }
-    //alert("Ejecutado el SELECT");
     actualizarLista();
 }
 function btn() {
     let btn = $("#btn");
-    let nombre = document.getElementById("nombre").value;
-    let temporada = document.getElementById("temporada").value;
-    let capitulo = document.getElementById("capitulo").value;
-    let  = document.getElementById("").value;
+    let telefono = $("#telefono").val();
+    let nombre = $("#nombre").val();
+    let apellido = $("#apellido").val();
+    let fechanac = $("#fechanac").val();
     switch (btn.text()) {
         case "Subir":
-            Subir([nombre]);
+            Subir([telefono, nombre, apellido, fechanac]);
         break;
         case "Borrar":
-            Borrar([nombre]);
+            Borrar([telefono]);
         break;
         case "Buscar":
         break;
@@ -118,15 +87,8 @@ function btn() {
         case "Listar":
             Listar([]);
         break;
-        case "Inicial":
-        break;
-        case "Contar":
-        break;
-        case "Nuevo Capitulo":
-            Subir([nombre, temporada, capitulo, ]);
-        break;
         case "Editar ":
-            Editar([nombre, temporada, ]);
+            Editar([telefono, nombre, apellido, fechanac]);
         break;
         case "Opinión":
         break;
@@ -148,40 +110,14 @@ function tabla(elemento, fila) {
         nombre.setAttribute("style", "cursor:pointer");
         nombre.setAttribute("class", "btn-success text-dark");
         nombre.addEventListener("click", (e)=>{
-            $("#nombre").val(nombre.innerText);
-            $("#temporada").val(temporada);
-            $as= $("#select").val("Nuevo Capitulo");
+            $("#telefono").val(nombre.innerText);
+            $("#nombre").val(temporada);
             actualizarLista();
         });
         
     }else{
         nombre.innerHTML="";
     }
-}
-
-function tabla(elemento, fila){
-    if ((elemento.temporada)&&(elemento.capitulo)&&(elemento.y)) {
-        let temporada = fila.insertCell();
-        temporada.innerHTML=elemento.temporada;
-        //alert("funciona");
-        let capitulo = fila.insertCell();
-        capitulo.innerHTML=elemento.capitulo;
-    
-        let x = fila.insertCell();
-        x.innerHTML=elemento.y;
-    
-    }else{
-        let temporada = fila.insertCell();
-        temporada.innerHTML="";
-        //alert("funciona");
-        let capitulo = fila.insertCell();
-        capitulo.innerHTML="";
-    
-        let x = fila.insertCell();
-        x.innerHTML="";
-    }
-    let celda5 = fila.insertCell();
-        celda5.innerHTML="";
 }
 
 function celdaVacia(contenido, fila) {
@@ -193,8 +129,8 @@ function celdaVacia(contenido, fila) {
 function Borrar(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN//Borrar.php",
-        data:{nombre:valores[0]},
+        url:"PHP/COMUN/DATOS/Borrar.php",
+        data:{telefono:valores[0]},
         success:function(res){
             //alert(res);
             $("#nombre").val(($("#nombre").val().charAt(0)));
@@ -204,45 +140,22 @@ function Borrar(valores) {
     });
 }
 
-function BuscarAll(valores) {
-    $("#noBorrar").nextAll("tr").remove();
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN//BuscarAll.php",
-        data:{nombre:valores[0]},
-        dataType: "json",
-        success:function(res){
-            //alert(res);
-            let data = JSON.stringify(res);
-            data = JSON.parse(data);
-            let tabla = document.getElementById("table");
-            for (elemento of data) {
-                let fila = tabla.insertRow();
-                celdaVacia("", fila);
-                tabla(elemento, fila);
-                tabla(elemento, fila);
-            }
-        }
-    });
-}
-
 function BuscarNombre(valores) {
     $("#noBorrar").nextAll("tr").remove();
     //alert("Entrar al Buscar");
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN//BuscarNombre.php",
-        data:{nombre:valores[0]},
+        url:"PHP/COMUN/DATOS/BuscarNombre.php",
+        data:{nombre:valores[0], apellidos:valores[0]},
         dataType: "json",
         success:function(res){
             //alert(res);
             let data = JSON.stringify(res);
             data = JSON.parse(data);
-            let tabla = document.getElementById("table");
+            let tabla = $("#table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
                 celdaVacia("", fila);
-                tabla(elemento, fila);
                 tabla(elemento, fila);
             }
         }
@@ -254,16 +167,15 @@ function Contar(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN//Contar.php",
+        url:"PHP/COMUN/DATOS/Contar.php",
         dataType: "json",
         success:function(res){
             let data = JSON.stringify(res);
             data = JSON.parse(data);
-            let tabla = document.getElementById("table");
+            let tabla = $("#table");
                 //alert("entra");
                 let fila = tabla.insertRow();
                 celdaVacia(JSON.stringify(data), fila);
-                tabla("", fila);
                 tabla("", fila);
         }
     });
@@ -272,59 +184,32 @@ function Contar(valores) {
 function Editar(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/S/Editar.php",
-        data:{nombre:valores[0],temporada:valores[1], x:valores[2]},
+        url:"PHP/COMUN/DATOS/Editar.php",
+        data:{telefono:valores[0], 
+                nombre:valores[1], apellido:valores[2], fecha:valores[3]},
         success:function(res){
             actualizarLista()
 
             //alert(res);
-            //valores[0] = valores[0].charAt(0);
-            //ListarPorInicial([valores[0]]);
-            //alert(res);
         }
     });
 }
 
-function ListarPorInicial(valores) {
+function Listar() {
     $("#noBorrar").nextAll("tr").remove();
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN//Inicial.php",
-        data:{inicial:valores[0]},
+        url:"PHP/COMUN/DATOS/Listar.php",
         dataType: "json",
         success:function(res){
             let data = JSON.stringify(res);
             data = JSON.parse(data);
-            let tabla = document.getElementById("table");
+            let tabla = $("#table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
                 celdaVacia("", fila);
 
-                tabla(elemento, fila);
-                tabla(elemento, fila);
-            } 
-        }
-    });
-
-}
-
-function Listar(valores) {
-    $("#noBorrar").nextAll("tr").remove();
-
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN//Listar.php",
-        dataType: "json",
-        success:function(res){
-            let data = JSON.stringify(res);
-            data = JSON.parse(data);
-            let tabla = document.getElementById("table");
-            for (elemento of data) {
-                let fila = tabla.insertRow();
-                celdaVacia("", fila);
-
-                tabla(elemento, fila);
                 tabla(elemento, fila);
             }  
         }
@@ -332,27 +217,13 @@ function Listar(valores) {
 }
 
 function Subir(valores) {
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN//Subir.php",
-        data:{nombre:valores[0]},
-        //dataType: "json",
-        success:function(res){
-            //alert(res);
-            actualizarLista();
-        }
-    });
-}
-
-function Subir(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/S/Subir.php",
-        data:{nombre:valores[0],temporada:valores[1],capitulo:valores[2], x:valores[3]},
+        url:"PHP/COMUN/DATOS/Subir.php",
+        data:{temporada:valores[0], nombre:valores[1],apellido:valores[2], fecha:valores[3]},
         success:function(res){
             actualizarLista()
-
             //alert(res);
         }
     });
