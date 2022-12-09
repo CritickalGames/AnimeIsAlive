@@ -5,52 +5,50 @@ require_once "MConexion.php";
 
 class ModeloTABLA extends ModeloConexion
 {
-    public function set($Key)
+    const tabla="TABLA";
+
+    public function set($key, $atr)
     {
-        $sql = "INSERT INTO TABLA (Key) 
-            VALUES ('$Key')";
-        $this->sentencia($sql);
+        echo "<br>-setEstados Modelo-";
+        $tabla = self::tabla;
+        return $this->sqlSet($tabla, "key, atr", 
+            /*Value*/        "'$key', '$atr'");
     }
 ///////////////////Borrar
-    public function borrar($Key){
-        $sql = "DELETE FROM TABLA WHERE Key='$Key' ";
-        $this->sentencia($sql);
+    public function borrar($atr){
+        $tabla = self::tabla;
+        return $this->sqlBorrar($tabla, "key",
+                                $atr);
     }
 ///////////////////Search
-    public function buscar($Name){
-        $sql="SELECT * FROM TABLA WHERE nombre LIKE '%$Name%'";
-        return $this->get($sql);
+    public function buscarPorAtributo($atr){
+        $tabla = self::tabla;
+        return $this->sqlBuscar($tabla, "atributo", "%$atr%");
     }
 ///////////////////Edit
-    public function editarATR($Key, $ATR){
-        $sql = "UPDATE TABLA 
-        SET ATR='$ATR' 
-        WHERE Key='$Key' ";
-        $this->sentencia($sql);
+    public function editarAtributo($key, $ATR){
+        $tabla = self::tabla;
+        $nombreDeClave= "key";
+        return $this->sqlEditar($tabla, "atributo", $ATR, $nombreDeClave, $key);
     }
 ///////////////////Get
-    public function getByATR($Key, $ATR){
-        $sql="SELECT * from TABLA where Key='$Key' ";
+    public function getByAtributo($ATR){
+        $tabla = self::tabla;
+        return $this->sqlGetBy($tabla, "atributo", $ATR);
+    }
+///////////////////Group
+    public function groupForTemporadaByNombre($nombre){//INVENTA LO QUE QUIERAS
+        $sql="RELLENAR";
         return $this->get($sql);
     }
 ///////////////////////////////
     public function get_ALL(){
-        $sql="SELECT * from TABLA";
-        return $this->get($sql);
-    }
-
-    public function get_ALL_Where(string $where){
-        $sql="SELECT * from TABLA WHERE $where";
-        return $this->get($sql);
+        $tabla = self::tabla;
+        return $this->sqlGet($tabla);
     }
 
     public function contar(){
-        $sql="SELECT * from TABLA";
-        return $this->count($sql);
-    }
-
-    public function contarWhere(string $where){
-        $sql="SELECT * from TABLA WHERE $where";
+        $sql="SELECT * from Estados";
         return $this->count($sql);
     }
 }
