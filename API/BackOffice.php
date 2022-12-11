@@ -19,27 +19,6 @@ class Backoffice{
         }
     }
 
-    function buscar(string $tabla, array $valores){
-        
-        switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
-                $by = "buscarAnimeBy".$valores[0];
-                return ($obj->{$by}($valores[1]));
-                break;
-            case "estados":
-                $obj = new ControladorEstados();
-                $by = "buscarEstadosBy".$valores[0];
-                return ($obj->{$by}($valores[1]));
-                break;
-            case "datos":
-                $obj = new ControladorDatos();
-                $by = "buscarDatosBy".$valores[0];
-                return ($obj->{$by}($valores[1]));
-                break;
-        }
-    }
-
     function borrar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
@@ -58,6 +37,27 @@ class Backoffice{
                 $obj = new ControladorDatos();
                 $obj->borrarDatos(
                         $valores[0]);
+                break;
+        }
+    }
+
+    function buscar(string $tabla, array $valores){
+        
+        switch (strtolower($tabla)) {
+            case "anime":
+                $obj = new ControladorAnime();
+                $by = "buscarAnimeBy".$valores[0];
+                return ($obj->{$by}($valores[1]));
+                break;
+            case "estados":
+                $obj = new ControladorEstados();
+                $by = "buscarEstadosBy".$valores[0];
+                return ($obj->{$by}($valores[1]));
+                break;
+            case "datos":
+                $obj = new ControladorDatos();
+                $by = "buscarDatosBy".$valores[0];
+                return ($obj->{$by}($valores[1]));
                 break;
         }
     }

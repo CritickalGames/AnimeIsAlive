@@ -5,8 +5,11 @@ require_once "RModelos.php";
 class ControladorDatos extends ModeloDatos
 {
 
+    const nombreDeTabla = "Datos";
+
     public function setDatos($telefono, $nombre, $apellido, $fechnac){
-        echo "<br>-setDatos Controlador-";
+        $alert = self::nombreDeTabla;
+        echo "<br>-set$alert Controlador-";
         $this->set($telefono, $nombre, $apellido, $fechnac);
     }
 ///////////////////Borrar
@@ -14,23 +17,31 @@ class ControladorDatos extends ModeloDatos
         $this->borrar($telefono);
     }
 ///////////////////Search
+    public function buscarDatosByTelefono($Atributo){
+        return $this->buscarPorTelefono($Atributo);
+    }
     public function buscarDatosByNombre($Atributo){
         return $this->buscarPorNombre($Atributo);
     }
     public function buscarDatosByApellido($Atributo){
         return $this->buscarPorApellido($Atributo);
     }
+    public function buscarDatosByFecha($Atributo){
+        return $this->buscarPorFecha($Atributo);
+    }
 ///////////////////Edit
-    public function editarDatosNombre($telefono, $ATR){
-        $this->editarNombre($telefono, $ATR);
+    public function editarDatosNombre($columnas, $ATR){
+        $this->editarNombre($columnas, $ATR);
     }
-    public function editarDatosApellido($telefono, $ATR){
+    public function editarDatosApellido($columnas, $ATR){
         
-        return "-ENTRÓ".$this->editarApellido($telefono, $ATR);
+        $alert = self::nombreDeTabla;
+        return "-ENTRÓ a edit $alert apellido".$this->editarApellido($columnas, $ATR);
     }
-    public function editarDatosFecha($telefono, $ATR){
+    public function editarDatosFecha($columnas, $ATR){
         
-        return "-ENTRÓ".$this->editarFecha($telefono, $ATR);
+        $alert = self::nombreDeTabla;
+        return "-ENTRÓ a edit $alert fecha".$this->editarFecha($columnas, $ATR);
     }
 ///////////////////Get
     public function getDatosByNombre($nombre){

@@ -7,10 +7,12 @@ class ModeloDatos extends ModeloConexion
 {
     const tabla="datos";
     const nombreDeClave="telefono";
+    const nombreDeTabla = "Datos";
 
     public function set($telefono, $nombre, $apellido, $fechnac)
     {
-        echo "<br>-setDatos Modelo-";
+        $alert = self::nombreDeTabla;
+        echo "<br>-set$alert Modelo-";
         $tabla = self::tabla;
         return $this->sqlSet($tabla, "telefono, nombre, apellido, fechnac", 
             /*Value*/        "'$telefono', '$nombre', '$apellido', '$fechnac'");
@@ -22,6 +24,12 @@ class ModeloDatos extends ModeloConexion
                                 $atr);
     }
 ///////////////////Search
+
+    public function buscarPorTelefono($atr){
+        $tabla = self::tabla;
+        return $this->sqlBuscar($tabla, "telefono", "%$atr%");
+    }
+
     public function buscarPorNombre($atr){
         $tabla = self::tabla;
         return $this->sqlBuscar($tabla, "nombre", "%$atr%");
@@ -30,6 +38,11 @@ class ModeloDatos extends ModeloConexion
     public function buscarPorApellido($atr){
         $tabla = self::tabla;
         return $this->sqlBuscar($tabla, "apellido", "%$atr%");
+    }
+
+    public function buscarPorFecha($atr){
+        $tabla = self::tabla;
+        return $this->sqlBuscar($tabla, "fechnac", "%$atr%");
     }
 ///////////////////Edit
     public function editarNombre($telefono, $ATR){

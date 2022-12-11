@@ -11,10 +11,25 @@ const swDatos= "DATOS";
         return $obj->borrar($swDatos, [$nombre]);
     }
 ///////////////////Search
-    function buscarDatos($name){
+    function buscarDatosPorTelefono($name){
         $obj = new Backoffice ();
         $swDatos = self::swDatos;
-        return $obj->buscar($swDatos, [$name]);
+        return $obj->buscar($swDatos, ["Telefono", $name]);
+    }
+    function buscarDatosPorNombre($name){
+        $obj = new Backoffice ();
+        $swDatos = self::swDatos;
+        return $obj->buscar($swDatos, ["Nombre", $name]);
+    }
+    function buscarDatosPorApellido($name){
+        $obj = new Backoffice ();
+        $swDatos = self::swDatos;
+        return $obj->buscar($swDatos, ["Apellido", $name]);
+    }
+    function buscarDatosPorFecha($name){
+        $obj = new Backoffice ();
+        $swDatos = self::swDatos;
+        return $obj->buscar($swDatos, ["Fecha", $name]);
     }
 ///////////////////Edit
     function editarDatosCapitulo($nombre, $temporada, $ATR){
@@ -70,8 +85,8 @@ const swDatos= "DATOS";
     function subirDatos($nombre,$temporada,$capitulo,$estado ){
         $obj = new Backoffice ();
         echo "<br>-admin subir estado-";
-        $swDatos = self::swDatos;
-        $obj->subir($swDatos, [$nombre, $temporada, $capitulo, $estado]);
+        $sw = self::swDatos;
+        $obj->subir($sw, [$nombre, $temporada, $capitulo, $estado]);
     }
 /////////////////////////
     function contarDatos(){

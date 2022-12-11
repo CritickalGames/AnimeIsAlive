@@ -23,7 +23,7 @@ class ModeloConexion
 
   public function sentencia(string $sql){
     if ($this->consultar($sql)) {
-      return "-ENTRÉ";
+      return "-ENTRÉ a la consutla";
     }
   }
 
@@ -102,7 +102,7 @@ class ModeloConexion
   
   public function sqlSet(string $tabla, string $columna, string $NAME){
         echo "<br>-set Conexión-";
-        $sql = "INSERT INTO $tabla (nombre, temporada, Capitulo, Estado) 
+        $sql = "INSERT INTO $tabla ($columna) 
             VALUES ($NAME)";
     return $this->sentencia($sql);
   }
