@@ -12,30 +12,51 @@ $array = [
 ["telefono"=> "1111111", "nombre"=> "35zd eas", "apellido"=> "124zdzxdg", "fechnac"=> "2022-12-11"]];
 
 $ingresado=["telefono"=> "14234", "nombre"=> "35zd eas", "apellido"=> "124zdzxdg", "fechnac"=> "2022-12-11"];
-
+array_push($array, $ingresado);
+array_push($array, $ingresado);
+$ingresado=["telefono"=> "52525", "nombre"=> "35zd eas", "apellido"=> "124zdzxdg", "fechnac"=> "2022-12-11"];
 array_push($array, $ingresado);
 array_push($array, $ingresado);
 
 $resultado=[];
 $claves=[];
 
-for ($i=0; $i <count($array) ; $i++) { 
-    echo "Iniciamos [$i]";
-    echo "<br>";
-    for ($j=count($array)-1; $j >= 0 ; $j--) {
+for ($inicio=0; $inicio <count($array) ; $inicio++) { 
+    for ($termino=count($array)-1; $termino >= 0 ; $termino--) {
 
         if (
-            $array[$i]["telefono"]==$array[$j]["telefono"]
-            &&(!in_array($array[$i]["telefono"], $claves))
+            $array[$inicio]["telefono"]==$array[$termino]["telefono"]
+            &&(!in_array($array[$inicio]["telefono"], $claves))
         ) {
-            array_push($resultado, $array[$i]);
-            array_push($claves, $array[$i]["telefono"]);
+            array_push($resultado, $array[$inicio]);
+            array_push($claves, $array[$inicio]["telefono"]);
             
-        }else{
-            echo "$i-$j<br>";
+        }
+        if (
+            $array[$inicio]["nombre"]==$array[$termino]["nombre"]
+            &&(!in_array($array[$inicio]["telefono"], $claves))
+        ) {
+            array_push($resultado, $array[$inicio]);
+            array_push($claves, $array[$inicio]["telefono"]);
+            
+        }
+        if (
+            $array[$inicio]["apellido"]==$array[$termino]["apellido"]
+            &&(!in_array($array[$inicio]["telefono"], $claves))
+        ) {
+            array_push($resultado, $array[$inicio]);
+            array_push($claves, $array[$inicio]["telefono"]);
+            
+        }
+        if (
+            $array[$inicio]["fechnac"]==$array[$termino]["fechnac"]
+            &&(!in_array($array[$inicio]["telefono"], $claves))
+        ) {
+            array_push($resultado, $array[$inicio]);
+            array_push($claves, $array[$inicio]["telefono"]);
+            
         }
     }
-    echo "<br>";
 }
 
 var_dump($resultado);echo"<br>";
@@ -67,7 +88,7 @@ print_r($claves);
 </form>
 
 <form action="PHP/COMUN/DATOS/Buscar.php" method="post">
-    <p>Subir</p>
+    <p>Buscar</p>
     <input type="text" name="telefono" placeholder="Telefono">
     <input type="text" name="nombre" placeholder="Nombre">
     <input type="text" name="apellido" placeholder="Apellido">

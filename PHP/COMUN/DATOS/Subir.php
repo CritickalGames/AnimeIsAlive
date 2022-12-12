@@ -11,5 +11,9 @@ $fecha=$_POST["fecha"];
 
 echo $telefono."-".$nombre."-".$apellido."-".$fecha;
 echo"<br>";
-var_dump($obj->subirDatos($telefono, $nombre, $apellido, $fecha));
+
+if ($telefono!=NULL && $nombre!=NULL && $apellido!=NULL && $fecha!=NULL) {
+    var_dump($obj->subirDatos($telefono, $nombre, $apellido, $fecha));
+}
+
 ?>
