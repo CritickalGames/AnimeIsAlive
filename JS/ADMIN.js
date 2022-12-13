@@ -3,7 +3,6 @@ window.addEventListener("load", main);
 
 function main() {
     select();
-    actualizarLista();
     
     document.getElementById("ci")
         .addEventListener("keyup", actualizarLista);
