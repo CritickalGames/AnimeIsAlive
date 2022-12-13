@@ -22,9 +22,8 @@ class ModeloConexion
   }
 
   public function sentencia(string $sql){
-    if ($this->consultar($sql)) {
-      return "-ENTRÉ a la consutla";
-    }
+    
+    return "-ENTRÉ a la consutla-<br>-$sql <br>-".$this->consultar($sql);
   }
 
   public function get(string $sql){
@@ -38,7 +37,7 @@ class ModeloConexion
     }
   }
 ////////////////////////////////////////////////
-  function colTOatr(string $columnas, ... $atr){
+  function colTOatr(string $columnas, array $atr){
     $col= str_word_count($columnas, 1);
     $clave= "";
     foreach ($atr as $key => $value) {
@@ -72,9 +71,17 @@ class ModeloConexion
   }
 
   public function sqlEditar(string $tabla, string $columna, string $atr, string $columnas, ... $atributos){
-    $clave = $this->colTOatr($columnas, $atr);
+    $clave = $this->colTOatr($columnas, [$atributos]);
     $sql = "UPDATE $tabla 
         SET $columna='$atr' 
+        WHERE $clave ";
+        return $this->sentencia($sql);
+  }
+
+  public function sqlCancelar(string $tabla, string $columna, string $columnas, ... $atributos){
+    $clave = $this->colTOatr($columnas, $atributos);
+    $sql = "UPDATE $tabla 
+        SET $columna=NULL
         WHERE $clave ";
         return $this->sentencia($sql);
   }

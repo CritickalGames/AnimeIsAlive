@@ -1,5 +1,6 @@
 <?php 
 	require_once "M"."Datos.php";
+	require_once "M"."Pasaje.php";
 	//require_once "M"."Estados.php";
 	/*
 	require_once "M"."Franquicia.php";

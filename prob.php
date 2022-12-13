@@ -63,8 +63,39 @@ var_dump($resultado);echo"<br>";
 print_r($claves);
 
 ?>
+<br>///////////////////////////////////////////////////////
 
+<form action="PHP/COMUN/PASAJE/Listar.php" method="post">
+    
+    <button type="submit">Listar</button>
+</form>
 
+<form action="PHP/COMUN/PASAJE/Registrar.php" method="post">
+    
+    <button type="submit">Registrar</button>
+    <input type="text" name="aciento" placeholder="Aciento">
+    <!--
+    <select name="tipo">
+        <option value="ventana">Ventana</option>
+        <option value="pasillo">Pasillo</option>
+    </select>
+    -->
+    <input type="text" name="ci" placeholder="Ci">
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="apellido" placeholder="Apellido">
+    <input type="text" name="email" placeholder="Email">
+</form>
+
+<form action="PHP/COMUN/PASAJE/Cancelar.php" method="post">
+    <button type="submit">Cancelar</button>
+    <input type="text" name="aciento" placeholder="Aciento">
+</form>
+
+<form action="PHP/COMUN/PASAJE/Limpiar.php" method="post">
+    <button type="submit">Limpiar</button>
+</form>
+
+///////////////////////////////////////////////////////
 <form action="PHP/COMUN/DATOS/Listar.php" method="post">
     
     <button type="submit">Listar</button>

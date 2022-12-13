@@ -2,103 +2,95 @@
 require_once "RAPIs.php";
 
 class UserAdmin{
-/////////DATOS//////////////////////////
-const swDatos= "DATOS";
+/////////PASAJE//////////////////////////
+const swPasaje= "PASAJE";
 ///////////////////Borrar
-    function borrarDatos($nombre){
-        $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->borrar($swDatos, [$nombre]);
-    }
 ///////////////////Search
-    function buscarDatosPorTelefono($name){
+    function buscarPasajePorTelefono($name){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->buscar($swDatos, ["Telefono", $name]);
+        $swPasaje = self::swPasaje;
+        return $obj->buscar($swPasaje, ["Telefono", $name]);
     }
-    function buscarDatosPorNombre($name){
+    function buscarPasajePorNombre($name){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->buscar($swDatos, ["Nombre", $name]);
+        $swPasaje = self::swPasaje;
+        return $obj->buscar($swPasaje, ["Nombre", $name]);
     }
-    function buscarDatosPorApellido($name){
+    function buscarPasajePorApellido($name){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->buscar($swDatos, ["Apellido", $name]);
+        $swPasaje = self::swPasaje;
+        return $obj->buscar($swPasaje, ["Apellido", $name]);
     }
-    function buscarDatosPorFecha($name){
+    function buscarPasajePorFecha($name){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->buscar($swDatos, ["Fecha", $name]);
+        $swPasaje = self::swPasaje;
+        return $obj->buscar($swPasaje, ["Fecha", $name]);
     }
 ///////////////////Edit
-    function editarDatosCapitulo($nombre, $temporada, $ATR){
+    function editarPasaje($nombre, $Temperatura, $ATR){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->editar($swDatos, ["Capitulo",$nombre, $temporada, $ATR]);
-    }
-    function editarDatosEstado($nombre, $Temperatura, $ATR){
-        $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->editar($swDatos, ["Estado",$nombre, $Temperatura, $ATR]);
+        $swPasaje = self::swPasaje;
+        return $obj->editar($swPasaje, ["Estado",$nombre, $Temperatura, $ATR]);
     }
 ///////////////////Get
-        function getDatosByNombre($name){
+        function getPasajeByNombre($name){
             $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-            return $obj->conseguir($swDatos, ["Nombre",$name, "ALL"]);
+        $swPasaje = self::swPasaje;
+            return $obj->conseguir($swPasaje, ["Nombre",$name, "ALL"]);
         }
-        function getDatosByID($nombre, $temporada){
+        function getPasajeByID($nombre, $temporada){
             $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-            return $obj->conseguir($swDatos, ["ID",$nombre, $temporada]);
+        $swPasaje = self::swPasaje;
+            return $obj->conseguir($swPasaje, ["ID",$nombre, $temporada]);
         }
 ///////////////////Group
-    function agruparDatosForTemporadaByNombre($nombre){
-        $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->agrupar($swDatos, ["ForTemporadaByNombre", $nombre]);
-    }
-    function agruparDatosForTemporadaByATRNombre(){
-        $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->agrupar($swDatos, ["ForTemporadaByATRNombre", "ALL"]);
-    }
-    function agruparDatosForTemporadaByInicial($nombre){
-        $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->agrupar($swDatos, ["ForTemporadaByNombre", $nombre]);
-    }
 ///////////////////Listar
-    function listarDatos(){
+    function listarPasaje(){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->listar($swDatos, ["All", "ALL"]);
-    }
-
-    function listarDatosPorNombre($nombre){
-        $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->listar($swDatos, ["nombre", $nombre]);
+        $swPasaje = self::swPasaje;
+        return $obj->listar($swPasaje, ["All", "ALL"]);
     }
 ///////////////////Subir
-    function subirDatos($nombre,$temporada,$capitulo,$estado ){
+///////////////////Registrar
+    function registrarPasaje($ci, $nombre, $apellido, $email, $valorPk){
         $obj = new Backoffice ();
-        echo "<br>-admin subir estado-";
-        $sw = self::swDatos;
-        $obj->subir($sw, [$nombre, $temporada, $capitulo, $estado]);
+        $swPasaje = self::swPasaje;
+        $uno=[];
+        array_push($uno, $obj->editar($swPasaje, ["","ci", $ci, $valorPk]));
+        array_push($uno, $obj->editar($swPasaje, ["","nombre", $nombre, $valorPk]));
+        array_push($uno, $obj->editar($swPasaje, ["","apellido", $apellido, $valorPk]));
+        array_push($uno, $obj->editar($swPasaje, ["","email", $email, $valorPk]));
+        return $uno;
+    }
+///////////////////Cancelar
+    function cancelarPasaje($valorPk){
+        $obj = new Backoffice ();
+        $swPasaje = self::swPasaje;
+        $obj->editar($swPasaje, ["Cancelar","ci", "", $valorPk]);
+        $obj->editar($swPasaje, ["Cancelar","nombre", "", $valorPk]);
+        $obj->editar($swPasaje, ["Cancelar","apellido", "", $valorPk]);
+        $obj->editar($swPasaje, ["Cancelar","email", "", $valorPk]);
+    }
+///////////////////Limpiar
+    function limpiarPasaje(){
+        $obj = new Backoffice ();
+        $swPasaje = self::swPasaje;
+        $obj->editar($swPasaje, ["Cancelar","ci", "", ""]);
+        $obj->editar($swPasaje, ["Cancelar","nombre", "", ""]);
+        $obj->editar($swPasaje, ["Cancelar","apellido", "", ""]);
+        $obj->editar($swPasaje, ["Cancelar","email", "", ""]);
     }
 /////////////////////////
-    function contarDatos(){
+    function contarPasaje(){
         $obj = new Backoffice ();
-        $swDatos = self::swDatos;
-        return $obj->contar($swDatos);
+        $swPasaje = self::swPasaje;
+        return $obj->contar($swPasaje);
     }
 
 }
 
 //$obj = new UserAdmin();
 
-//$obj->editarDatosCapitulo("z",1,7);
+//$obj->editarPasajeCapitulo("z",1,7);
 
 ?>
