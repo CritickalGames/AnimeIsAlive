@@ -4,5 +4,5 @@ require_once("../../USER/Admin.php");
 
 $obj= new UserAdmin();
 
-var_dump($obj->listarPasaje());
+echo json_encode($obj->listarPasaje());
 ?>

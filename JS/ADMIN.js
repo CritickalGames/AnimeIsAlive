@@ -3,7 +3,7 @@ window.addEventListener("load", main);
 
 function main() {
     select();
-    
+    actualizarLista();
     
     document.getElementById("ci")
         .addEventListener("keyup", actualizarLista);
@@ -27,7 +27,6 @@ function select() {
     let select = $("#select").val();
     let btn = $("#btn");
     btn.text(select);
-    alert(btn.text());
 
     switch (select) {
 
@@ -38,17 +37,17 @@ function select() {
 }
 function btn() {
     let btn = $("#btn");
-    let aciento = $("#aciento").val();
+    let asiento = $("#asiento").val();
     let ci = $("#ci").val();
     let nombre = $("#nombre").val();
     let apellido = $("#apellido").val();
     let email = $("#email").val();
     switch (btn.text()) {
         case "Registrar":
-            Registrar([aciento, ci, nombre, apellido, email]);
+            Registrar([asiento, ci, nombre, apellido, email]);
         break;
         case "Cancelar":
-            Cancelar([aciento]);
+            Cancelar([asiento]);
         break;
         case "Listar":
             Listar([]);
@@ -64,16 +63,16 @@ function btn() {
 
 
 ///////////////////////////////////////////////////////////////
-function tabla(elemento, fila) {
+function tablaPasaje(elemento, fila) {
     //alert("entra");
-    let aciento = fila.insertCell();
+    let asiento = fila.insertCell();
     let tipo = fila.insertCell();
     let ci = fila.insertCell();
     let nombre = fila.insertCell();
     let apellido = fila.insertCell();
     let email = fila.insertCell();
-    if (elemento.ci) {
-        aciento.innerHTML=elemento.aciento;
+    if (elemento.asiento) {
+        asiento.innerHTML=elemento.asiento;
         tipo.innerHTML=elemento.tipo;
         ci.innerHTML=elemento.ci;
         nombre.innerHTML=elemento.nombre;
@@ -83,7 +82,7 @@ function tabla(elemento, fila) {
         ci.setAttribute("style", "cursor:pointer");
         ci.setAttribute("class", "btn-success text-dark");
         ci.addEventListener("click", (e)=>{
-            $("#aciento").val(aciento.innerText);
+            $("#asiento").val(asiento.innerText);
             $("#tipo").val(tipo.innerText);
             $("#ci").val(ci.innerText);
             $("#nombre").val(nombre.innerText);
@@ -93,14 +92,24 @@ function tabla(elemento, fila) {
         });
         
     }else{
-        nombre.innerHTML="";
+        nombre.innerHTML="1";
     }
-    if (elemento.nombre) {
-        nombre.innerHTML=elemento.nombre;
-        
+    if (elemento.ci) {
+        asiento.className ="bg-success";
+        tipo.className ="bg-success";
+        ci.className ="bg-success";
+        nombre.className ="bg-success";
+        apellido.className ="bg-success";
+        email.className ="bg-success";
     }else{
-        nombre.innerHTML="";
+        asiento.className ="bg-danger";
+        tipo.className ="bg-danger";
+        ci.className ="bg-danger";
+        nombre.className ="bg-danger";
+        apellido.className ="bg-danger";
+        email.className ="bg-danger";
     }
+    
 }
 
 function celdaVacia(contenido, fila) {
@@ -118,27 +127,27 @@ function Listar() {
         url:"PHP/COMUN/PASAJE/Listar.php",
         dataType: "json",
         success:function(res){
+
             let data = JSON.stringify(res);
             data = JSON.parse(data);
-            let tabla = $("#table");
+            let tabla = document.getElementById("table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
                 celdaVacia("", fila);
 
-                tabla(elemento, fila);
+                tablaPasaje(elemento, fila);
             }  
         }
     });
 }
 
 function Registrar(valores) {
-
     $.ajax({
         type:"POST",
         url:"PHP/COMUN/PASAJE/Registrar.php",
-        data:{aciento:valore[0],ci:valore[1], nombre:valore[2], apellido:valore[3], email:valore[4] },
+        data:{asiento:valores[0],ci:valores[1], nombre:valores[2], apellido:valores[3], email:valores[4] },
         success:function(res){
-            actualizarLista()
+            actualizarLista();
             //alert(res);
         }
     });
@@ -149,7 +158,7 @@ function Cancelar(valores) {
     $.ajax({
         type:"POST",
         url:"PHP/COMUN/PASAJE/Cancelar.php",
-        data:{aciento:valore[0]},
+        data:{asiento:valores[0]},
         success:function(res){
             actualizarLista()
             //alert(res);

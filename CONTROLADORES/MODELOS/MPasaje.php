@@ -6,7 +6,7 @@ require_once "MConexion.php";
 class ModeloPasaje extends ModeloConexion
 {
     const tabla="pasaje";
-    const nombreDeClave="aciento";
+    const nombreDeClave="asiento";
 
 ///////////////////Search
 
@@ -25,6 +25,11 @@ class ModeloPasaje extends ModeloConexion
         $tabla = self::tabla;
         $nombreDeClave= self::nombreDeClave;
         return $this->sqlCancelar($tabla, $col, $nombreDeClave, $valorPk);
+    }
+    public function limpiar($col, ... $valorPk){
+        $tabla = self::tabla;
+        $nombreDeClave= self::nombreDeClave;
+        return $this->sqlLimpiar($tabla, $col, $nombreDeClave, $valorPk);
     }
 ///////////////////Get
     public function getBy($col, $ATR){

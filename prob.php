@@ -88,7 +88,7 @@ print_r($claves);
 
 <form action="PHP/COMUN/PASAJE/Cancelar.php" method="post">
     <button type="submit">Cancelar</button>
-    <input type="text" name="aciento" placeholder="Aciento">
+    <input type="text" name="asiento" placeholder="Aciento">
 </form>
 
 <form action="PHP/COMUN/PASAJE/Limpiar.php" method="post">

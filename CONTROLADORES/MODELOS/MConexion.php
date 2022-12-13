@@ -7,7 +7,7 @@ class ModeloConexion
     $server = 'localhost:3306';
     $usuario = 'root';
     $contraseña = '';
-    $basededatos = 'escritopw';
+    $basededatos = 'eacpw';
     $conexion = new mysqli($server, $usuario, $contraseña, $basededatos);
     if($conexion->connect_error){
       die("conexion fallida" . $conexion->connect_error);
@@ -74,7 +74,7 @@ class ModeloConexion
     $clave = $this->colTOatr($columnas, [$atributos]);
     $sql = "UPDATE $tabla 
         SET $columna='$atr' 
-        WHERE $clave ";
+        WHERE $clave";
         return $this->sentencia($sql);
   }
 
@@ -83,6 +83,13 @@ class ModeloConexion
     $sql = "UPDATE $tabla 
         SET $columna=NULL
         WHERE $clave ";
+        return $this->sentencia($sql);
+  }
+
+  public function sqlLimpiar(string $tabla, string $columna, string $columnas, ... $atributos){
+    $sql = "UPDATE $tabla 
+        SET ci=NULL, nombre=NULL, apellido=NULL, email=NULL
+          ";
         return $this->sentencia($sql);
   }
 

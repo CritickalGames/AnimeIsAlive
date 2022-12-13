@@ -20,6 +20,10 @@ class ControladorPasaje extends ModeloPasaje
     public function editarPasajeCancelar($col, $valorPk){
         return $this->cancelar($col, $valorPk);
     }
+
+    public function editarPasajeLimpiar($col, $valorPk){
+        return $this->limpiar($col, $valorPk);
+    }
 ///////////////////Get
     public function getPasajeByNombre($nombre){
         return $this->getByNombre($nombre);

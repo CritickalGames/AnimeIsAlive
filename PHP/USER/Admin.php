@@ -6,31 +6,11 @@ class UserAdmin{
 const swPasaje= "PASAJE";
 ///////////////////Borrar
 ///////////////////Search
-    function buscarPasajePorTelefono($name){
-        $obj = new Backoffice ();
-        $swPasaje = self::swPasaje;
-        return $obj->buscar($swPasaje, ["Telefono", $name]);
-    }
-    function buscarPasajePorNombre($name){
-        $obj = new Backoffice ();
-        $swPasaje = self::swPasaje;
-        return $obj->buscar($swPasaje, ["Nombre", $name]);
-    }
-    function buscarPasajePorApellido($name){
-        $obj = new Backoffice ();
-        $swPasaje = self::swPasaje;
-        return $obj->buscar($swPasaje, ["Apellido", $name]);
-    }
-    function buscarPasajePorFecha($name){
-        $obj = new Backoffice ();
-        $swPasaje = self::swPasaje;
-        return $obj->buscar($swPasaje, ["Fecha", $name]);
-    }
 ///////////////////Edit
-    function editarPasaje($nombre, $Temperatura, $ATR){
+    function editarPasaje($col, $valATR, $valorPk){
         $obj = new Backoffice ();
         $swPasaje = self::swPasaje;
-        return $obj->editar($swPasaje, ["Estado",$nombre, $Temperatura, $ATR]);
+        return $obj->editar($swPasaje, ["Estado",$col, $valATR, $valorPk]);
     }
 ///////////////////Get
         function getPasajeByNombre($name){
@@ -66,19 +46,20 @@ const swPasaje= "PASAJE";
     function cancelarPasaje($valorPk){
         $obj = new Backoffice ();
         $swPasaje = self::swPasaje;
-        $obj->editar($swPasaje, ["Cancelar","ci", "", $valorPk]);
-        $obj->editar($swPasaje, ["Cancelar","nombre", "", $valorPk]);
-        $obj->editar($swPasaje, ["Cancelar","apellido", "", $valorPk]);
-        $obj->editar($swPasaje, ["Cancelar","email", "", $valorPk]);
+        $obj->editar($swPasaje, ["Cancelar","ci", $valorPk, ""]);
+        $obj->editar($swPasaje, ["Cancelar","nombre", $valorPk, ""]);
+        $obj->editar($swPasaje, ["Cancelar","apellido", $valorPk, ""]);
+        $obj->editar($swPasaje, ["Cancelar","email", $valorPk, ""]);
+        
     }
 ///////////////////Limpiar
     function limpiarPasaje(){
         $obj = new Backoffice ();
         $swPasaje = self::swPasaje;
-        $obj->editar($swPasaje, ["Cancelar","ci", "", ""]);
-        $obj->editar($swPasaje, ["Cancelar","nombre", "", ""]);
-        $obj->editar($swPasaje, ["Cancelar","apellido", "", ""]);
-        $obj->editar($swPasaje, ["Cancelar","email", "", ""]);
+        $obj->editar($swPasaje, ["Limpiar","ci", "", ""]);
+        $obj->editar($swPasaje, ["Limpiar","nombre", "", ""]);
+        $obj->editar($swPasaje, ["Limpiar","apellido", "", ""]);
+        $obj->editar($swPasaje, ["Limpiar","email", "", ""]);
     }
 /////////////////////////
     function contarPasaje(){
