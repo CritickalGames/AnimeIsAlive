@@ -5,23 +5,24 @@ require_once "RModelos.php";
 class ControladorEstados extends ModeloEstados
 {
 
-    public function setEstados($nombre, $temporada, $cap, $estado){
-        echo "<br>-setEstados Controlador-";
-        $this->set($nombre, $temporada, $cap, $estado);
+    public function set($valorColumna){
+        $this->setEstados($valorColumna);
     }
 ///////////////////Borrar
+    public function borrar($valorColumna){
+        $this->borrarEstados($valorColumna);
+    }
 ///////////////////Search
 ///////////////////Edit
 ///////////////////Get
 ///////////////////Group
 ///////////////////Listar
+    public function listar_($valorColumnaDeCriterio){
+        return $this->groupEstados_temporada_capitulo($valorColumnaDeCriterio);
+    }
 ///////////////////////////////
-    public function contarEstados(){
-        return $this->contar();
+    public function contar(){
+        return $this->contarEstados();
     }
 }
-//$obj = new ControladorEstados();
-
-//$obj->editarEstadosCapitulo("z",1,3);
-
 ?>

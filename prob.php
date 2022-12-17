@@ -65,73 +65,12 @@ print_r($claves);
 ?>
 <br>///////////////////////////////////////////////////////
 
-<form action="PHP/COMUN/PASAJE/Listar.php" method="post">
+<form action="PHP/PROB/ANIME/Listar.php" method="post">
     
     <button type="submit">Listar</button>
 </form>
 
-<form action="PHP/COMUN/PASAJE/Registrar.php" method="post">
-    
-    <button type="submit">Registrar</button>
-    <input type="text" name="aciento" placeholder="Aciento">
-    <!--
-    <select name="tipo">
-        <option value="ventana">Ventana</option>
-        <option value="pasillo">Pasillo</option>
-    </select>
-    -->
-    <input type="text" name="ci" placeholder="Ci">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="apellido" placeholder="Apellido">
-    <input type="text" name="email" placeholder="Email">
-</form>
-
-<form action="PHP/COMUN/PASAJE/Cancelar.php" method="post">
-    <button type="submit">Cancelar</button>
-    <input type="text" name="asiento" placeholder="Aciento">
-</form>
-
-<form action="PHP/COMUN/PASAJE/Limpiar.php" method="post">
-    <button type="submit">Limpiar</button>
-</form>
-
-///////////////////////////////////////////////////////
-<form action="PHP/COMUN/DATOS/Listar.php" method="post">
-    
-    <button type="submit">Listar</button>
-</form>
-
-
-<form action="PHP/COMUN/DATOS/Subir.php" method="post">
-    <p>Subir</p>
-    <input type="text" name="telefono" placeholder="Telefono">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="apellido" placeholder="Apellido">
-    <input type="date" name="fecha" placeholder="Fecha">
-    <button type="submit">Subir</button>
-</form>
-
-
-<form action="PHP/COMUN/DATOS/Borrar.php" method="post">
-    <p>Borrar</p>
-    <input type="text" name="telefono" placeholder="Telefono">
-    <button type="submit">Borrar</button>
-</form>
-
-<form action="PHP/COMUN/DATOS/Buscar.php" method="post">
-    <p>Buscar</p>
-    <input type="text" name="telefono" placeholder="Telefono">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="apellido" placeholder="Apellido">
-    <input type="date" name="fecha" placeholder="Fecha">
+<form action="PHP/PROB/ANIME/BuscarNombre.php" method="post">
+    <input type="text" name="nombre">
     <button type="submit">Buscar</button>
-</form>
-
-<form action="PHP/COMUN/DATOS/Listar.php" method="post">
-    <p>Subir</p>
-    <input type="text" name="telefono" placeholder="Telefono">
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="apellido" placeholder="Apellido">
-    <input type="date" name="fecha" placeholder="Fecha">
-    <button type="submit">Subir</button>
 </form>

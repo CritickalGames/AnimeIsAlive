@@ -17,8 +17,12 @@ class ControladorAnime extends ModeloAnime
 ///////////////////Get
 ///////////////////Group
 ///////////////////Listar
+    public function listar_(){
+        return $this->get_ALL();
+    }
+
     public function listar_nombre($valorColumna){
-        $this->getAnime_nombre($valorColumna);
+        return $this->getAnime_nombre("$valorColumna%");
     }
 ///////////////////////////////
     public function contar(){

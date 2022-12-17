@@ -19,14 +19,14 @@ class ModeloAnime extends ModeloConexion
     public function borrarAnime($valorClave){
         $tabla = self::tabla;
         $nombreClave = self::nombreClave;
-        return $this->sqlSet($tabla, $nombreClave, $valorClave);
+        return $this->sqlBorrar($tabla, $nombreClave, $valorClave);
     }
 ///////////////////Search
 ///////////////////Edit
 ///////////////////Get
     public function getAnime_nombre($valorColumna){
         $tabla = self::tabla;
-        return $this->sqlSet($tabla, "nombre", $valorColumna);
+        return $this->sqlGetByLike($tabla, "nombre", $valorColumna);
     }
 ///////////////////Group
 ///////////////////////////////

@@ -1,12 +1,13 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../USER/Admin.php";
     $objUserAdmin = new UserAdmin();
     $nombre = $_POST['nombre'];
     //$nombre = "Z";
     //$nombre = "a";
     if (($nombre!=NULL)) {
-        $animes=($objUserAdmin->buscarAnimeNombre($nombre));
-        $estados=($objUserAdmin->agruparEstadosForTemporadaByNombre($nombre));
+        $animes=($objUserAdmin->listarAnime_nombre($nombre));
+        $estados=($objUserAdmin->listarEstado_nombre($nombre));
+        
         foreach ($animes as $key => $value) {
             $array;
             $array[$key]=$value;
@@ -21,8 +22,8 @@ require_once "../USER/Admin.php";
         }
         echo json_encode($array);
     }else{
-        $animes=($objUserAdmin->listarAnimePorInicial("A"));
-        $estados=($objUserAdmin->agruparEstadosForTemporadaByInicial("A"));
+        $animes=($objUserAdmin->listarAnime_nombre("A"));
+        $estados=($objUserAdmin->listarEstado_nombre("A"));
 
         foreach ($animes as $key => $value) {
             $array;

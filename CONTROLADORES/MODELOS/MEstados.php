@@ -5,43 +5,52 @@ require_once "MConexion.php";
 
 class ModeloEstados extends ModeloConexion
 {
-    const tabla="Estados";
 
-    public function set($nombre, $temporada, $Capitulo, $Estados)
-    {
-        echo "<br>-setEstados Modelo-";
+    const tabla="estados";
+    const nombreClave="nombre";
+    const nombreColumnas="nombre";
+
+    public function setEstados($valorClave){
         $tabla = self::tabla;
-        return $this->sqlSet($tabla, "nombre, temporada, Capitulo, Estado", 
-            /*Value*/        "'$nombre', '$temporada', '$Capitulo', '$Estados'");
+        $nombreColumnas = self::nombreColumnas;
+        return $this->sqlSet($tabla, $nombreColumnas, $valorClave);
     }
 ///////////////////Borrar
+    public function borrarEstados($valorClave){
+        $tabla = self::tabla;
+        $nombreClave = self::nombreClave;
+        return $this->sqlBorrar($tabla, $nombreClave, $valorClave);
+    }
 ///////////////////Search
 ///////////////////Edit
-<<<<<<< HEAD
-=======
-    public function editarCapitulo($nombre, $temporada, $ATR){
-        $tabla = self::tabla;
-        $primaryKey= "nombre, temporada";
-        return $this->sqlEditar($tabla, "capitulo", $ATR, $primaryKey, $nombre, $temporada);
-    }
-
-    public function editarEstado($nombre, $temporada, $ATR){
-        $tabla = self::tabla;
-        $primaryKey= "nombre, temporada";
-        return $this->sqlEditar($tabla, "estado", $ATR, $primaryKey, $nombre, $temporada);
-    }
->>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
 ///////////////////Get
+    public function getEstados_nombre($valorColumna){
+        $tabla = self::tabla;
+        return $this->sqlGet($tabla, "nombre", $valorColumna);
+    }
 ///////////////////Group
+    public function groupEstados_temporada_capitulo($valordeColumna){
+        $tabla = self::tabla;
+        $sql = "SELECT * FROM $tabla e
+        WHERE EXISTS(
+            SELECT nombre, max(temporada) AS temporada, capitulo, estado FROM $tabla
+            WHERE nombre LIKE '$valordeColumna%' AND 
+                e.nombre= nombre
+            GROUP BY nombre
+            HAVING e.temporada= temporada
+            )
+        ";
+        return $this->get($sql);
+    }
 ///////////////////////////////
     public function get_ALL(){
         $tabla = self::tabla;
         return $this->sqlGet($tabla);
     }
 
-    public function contar(){
-        $sql="SELECT * from Estados";
-        return $this->count($sql);
+    public function contarEstado(){
+        $tabla = self::tabla;
+        return $this->sqlCount($tabla);
     }
 }
 ?>

@@ -60,7 +60,14 @@ class Backoffice{
                 return ($obj->{$by}(
                     $valores[1]
                 ));
-                break;
+            break;
+            case "estados":
+                $obj = new ControladorEstados();
+                $by = "listar_".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1]
+                ));
+            break;
         }
         
     }
