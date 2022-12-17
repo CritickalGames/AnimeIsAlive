@@ -179,6 +179,12 @@ function celdaVacia(contenido, fila) {
     vacio.innerHTML=contenido;
 }
 
+function tablaGeneral(elemento, fila){
+    celdaVacia("", fila);
+    tablaANIME(elemento, fila);
+    tablaESTADOS(elemento, fila);
+    tablaOPINION(elemento, fila);
+}
 
 ///////////////////////////////////////////////////////////////
 function BuscarAnimeNombre(valores) {
@@ -195,11 +201,8 @@ function BuscarAnimeNombre(valores) {
             let tabla = document.getElementById("table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
-                celdaVacia("", fila);
 
-                tablaANIME(elemento, fila);
-                tablaESTADOS(elemento, fila);
-                tablaOPINION(elemento, fila);
+                tablaGeneral(elemento, fila);
             }  
         },
         error: function(res){
@@ -222,10 +225,8 @@ function Listar() {
             let tabla = document.getElementById("table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
-                celdaVacia("", fila);
-
-                tablaANIME(elemento, fila);
-                tablaESTADOS(elemento, fila);
+                
+                tablaGeneral(elemento, fila)
             }  
         }
     });
