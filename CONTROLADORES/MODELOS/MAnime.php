@@ -24,6 +24,10 @@ class ModeloAnime extends ModeloConexion
 ///////////////////Search
 ///////////////////Edit
 ///////////////////Get
+    public function getAnime_nombre($valorColumna){
+        $tabla = self::tabla;
+        return $this->sqlSet($tabla, "nombre", $valorColumna);
+    }
 ///////////////////Group
 ///////////////////////////////
     public function get_ALL(){

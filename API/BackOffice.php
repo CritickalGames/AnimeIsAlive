@@ -4,20 +4,12 @@ require_once "RControladores.php";
 
 class Backoffice{
 
-    function agrupar(string $tabla, array $valores){
-        
-        switch (strtolower($tabla)) {
-            case "pasaje":
-                break;
-        }
-    }
-
     function borrar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                $obj->borrarPasaje(
+            case "anime":
+                $obj = new ControladorAnime();
+                $obj->borrar(
                         $valores[0]);
                 break;
         }
@@ -26,9 +18,9 @@ class Backoffice{
     function buscar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                $by = "buscarPasajeBy".$valores[0];
+            case "anime":
+                $obj = new ControladorAnime();
+                $by = "buscarBy".$valores[0];
                 return ($obj->{$by}($valores[1]));
                 break;
         }
@@ -37,22 +29,9 @@ class Backoffice{
     function contar(string $tabla){
         
         switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                return $obj->contarPasaje();
-                break;
-        }
-        
-    }
-
-    function conseguir(string $tabla, array $valores){
-        
-        switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                $by = "getPasajeBy".$valores[0];
-                return ($obj->{$by}(
-                    $valores[1]));
+            case "anime":
+                $obj = new ControladorAnime();
+                return $obj->contar();
                 break;
         }
         
@@ -61,9 +40,9 @@ class Backoffice{
     function editar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                $by = "editarPasaje".$valores[0];
+            case "anime":
+                $obj = new ControladorAnime();
+                $by = "editar".$valores[0];
                 return ($obj->{$by}(
                         $valores[1],
                         $valores[2],
@@ -75,10 +54,12 @@ class Backoffice{
     function listar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                $by = "listarPasajeBy".$valores[0];
-                return ($obj->{$by}($valores[1]));
+            case "anime":
+                $obj = new ControladorAnime();
+                $by = "listar_".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1]
+                ));
                 break;
         }
         
@@ -86,13 +67,11 @@ class Backoffice{
     function subir(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "pasaje":
-                $obj = new ControladorPasaje();
-                ($obj->setPasaje(
-                    $valores[0],
-                    $valores[1],
-                    $valores[2],
-                    $valores[3]));
+            case "anime":
+                $obj = new ControladorAnime();
+                ($obj->set(
+                    $valores[0]
+                ));
                 break;
         }
     }

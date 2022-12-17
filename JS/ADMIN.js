@@ -6,7 +6,6 @@ function main() {
     
     document.getElementById("ci")
         .addEventListener("keyup", actualizarLista);
-<<<<<<< HEAD
     document.getElementById("selector")
         .addEventListener("change", selectAnime);
     document.getElementById("boton")
@@ -20,25 +19,12 @@ function actualizarLista() {
         case "Buscar":
             BuscarAnimeAll(["ANIME", nombre]);
         break;
-=======
-    document.getElementById("select")
-        .addEventListener("change", select);
-    document.getElementById("btn")
-        .addEventListener("click", btn);
-}
-function actualizarLista() {
-    let select = $("#select").val();
-    //let nombre = document.getElementById("nombre").value;
-    
-    switch (select) {
->>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
         default:
             //alert("Ejecutado el Enlistar");
             Listar();
             break;
     }
 }
-<<<<<<< HEAD
 function selectAnime() {
     let select = $("#selector").val();
     let btn = $("#boton");
@@ -112,36 +98,17 @@ function selectAnime() {
             $("#opinon").prop('disabled', true);
         break;
     
-=======
-function select() {
-    let select = $("#select").val();
-    let btn = $("#btn");
-    btn.text(select);
-
-    switch (select) {
-
->>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
         default:
             break;
     }
     actualizarLista();
 }
-<<<<<<< HEAD
 function boton() {
     let btn = $("#boton");
     let nombre = document.getElementById("nombreANIME").value;
     let temporada = document.getElementById("temporadaESTADO").value;
     let capitulo = document.getElementById("capituloESTADO").value;
     let estado = document.getElementById("estadoESTADO").value;
-=======
-function btn() {
-    let btn = $("#btn");
-    let asiento = $("#asiento").val();
-    let ci = $("#ci").val();
-    let nombre = $("#nombre").val();
-    let apellido = $("#apellido").val();
-    let email = $("#email").val();
->>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
     switch (btn.text()) {
         case "Registrar":
             Registrar([asiento, ci, nombre, apellido, email]);
@@ -163,53 +130,22 @@ function btn() {
 
 
 ///////////////////////////////////////////////////////////////
-function tablaPasaje(elemento, fila) {
+function tablaANIME(elemento, fila) {
     //alert("entra");
-    let asiento = fila.insertCell();
-    let tipo = fila.insertCell();
-    let ci = fila.insertCell();
     let nombre = fila.insertCell();
-    let apellido = fila.insertCell();
-    let email = fila.insertCell();
     if (elemento.asiento) {
-        asiento.innerHTML=elemento.asiento;
-        tipo.innerHTML=elemento.tipo;
-        ci.innerHTML=elemento.ci;
         nombre.innerHTML=elemento.nombre;
-        apellido.innerHTML=elemento.apellido;
-        email.innerHTML=elemento.email;
         
-        ci.setAttribute("style", "cursor:pointer");
-        ci.setAttribute("class", "btn-success text-dark");
-        ci.addEventListener("click", (e)=>{
-            $("#asiento").val(asiento.innerText);
-            $("#tipo").val(tipo.innerText);
-            $("#ci").val(ci.innerText);
+            nombre.setAttribute("style", "cursor:pointer");
+            nombre.setAttribute("class", "btn-success text-dark");
+            nombre.addEventListener("click", (e)=>{
             $("#nombre").val(nombre.innerText);
-            $("#apellido").val(apellido.innerText);
-            $("#email").val(email.innerText);
             actualizarLista();
         });
         
     }else{
         nombre.innerHTML="1";
     }
-    if (elemento.ci) {
-        asiento.className ="bg-success";
-        tipo.className ="bg-success";
-        ci.className ="bg-success";
-        nombre.className ="bg-success";
-        apellido.className ="bg-success";
-        email.className ="bg-success";
-    }else{
-        asiento.className ="bg-danger";
-        tipo.className ="bg-danger";
-        ci.className ="bg-danger";
-        nombre.className ="bg-danger";
-        apellido.className ="bg-danger";
-        email.className ="bg-danger";
-    }
-    
 }
 
 function celdaVacia(contenido, fila) {
@@ -217,6 +153,8 @@ function celdaVacia(contenido, fila) {
                 
     vacio.innerHTML=contenido;
 }
+
+
 ///////////////////////////////////////////////////////////////
 
 function Listar() {
@@ -224,7 +162,7 @@ function Listar() {
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/PASAJE/Listar.php",
+        url:"PHP/PROB/ANIME/Listar.php",
         dataType: "json",
         success:function(res){
 
@@ -235,49 +173,30 @@ function Listar() {
                 let fila = tabla.insertRow();
                 celdaVacia("", fila);
 
-                tablaPasaje(elemento, fila);
+                tablaANIME(elemento, fila);
             }  
         }
     });
 }
 
-function Registrar(valores) {
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/PASAJE/Registrar.php",
-        data:{asiento:valores[0],ci:valores[1], nombre:valores[2], apellido:valores[3], email:valores[4] },
-        success:function(res){
-<<<<<<< HEAD
-            alert(res);
-=======
->>>>>>> origin/Prueba-para-el-profe
-            actualizarLista();
-            //alert(res);
-        }
-    });
-}
-
-function Cancelar(valores) {
+function BuscarAnimeNombre() {
+    $("#noBorrar").nextAll("tr").remove();
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/PASAJE/Cancelar.php",
-        data:{asiento:valores[0]},
+        url:"PHP/PROB/ANIME/Listar.php",
+        dataType: "json",
         success:function(res){
-            actualizarLista()
-            //alert(res);
-        }
-    });
-}
 
-function Limpiar(valores) {
+            let data = JSON.stringify(res);
+            data = JSON.parse(data);
+            let tabla = document.getElementById("table");
+            for (elemento of data) {
+                let fila = tabla.insertRow();
+                celdaVacia("", fila);
 
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/PASAJE/Limpiar.php",
-        success:function(res){
-            actualizarLista()
-            //alert(res);
+                tablaANIME(elemento, fila);
+            }  
         }
     });
 }

@@ -22,14 +22,9 @@ class ModeloConexion
   }
 
   public function sentencia(string $sql){
-<<<<<<< HEAD
     if ($this->enviarConsulta($sql)) {
       return "-ENTRÉ";
     }
-=======
-    
-    return "-ENTRÉ a la consutla-<br>-$sql <br>-".$this->consultar($sql);
->>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
   }
 
   public function get(string $sql){
@@ -76,13 +71,8 @@ class ModeloConexion
     return mysqli_num_rows($result);
   }
 
-<<<<<<< HEAD
   public function sqlEditar(string $tabla, string $columna, string $atr, string $columnas, ... $valorClave){
     $clave = $this->colTOatr($columnas, [$valorClave]);
-=======
-  public function sqlEditar(string $tabla, string $columna, string $atr, string $columnas, ... $atributos){
-    $clave = $this->colTOatr($columnas, [$atributos]);
->>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
     $sql = "UPDATE $tabla 
         SET $columna='$atr' 
         WHERE $clave";
@@ -94,13 +84,6 @@ class ModeloConexion
     $sql = "UPDATE $tabla 
         SET $columna=NULL
         WHERE $clave ";
-        return $this->sentencia($sql);
-  }
-
-  public function sqlLimpiar(string $tabla, string $columna, string $columnas, ... $atributos){
-    $sql = "UPDATE $tabla 
-        SET ci=NULL, nombre=NULL, apellido=NULL, email=NULL
-          ";
         return $this->sentencia($sql);
   }
 
