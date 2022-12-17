@@ -17,6 +17,20 @@ class ModeloEstados extends ModeloConexion
 ///////////////////Borrar
 ///////////////////Search
 ///////////////////Edit
+<<<<<<< HEAD
+=======
+    public function editarCapitulo($nombre, $temporada, $ATR){
+        $tabla = self::tabla;
+        $primaryKey= "nombre, temporada";
+        return $this->sqlEditar($tabla, "capitulo", $ATR, $primaryKey, $nombre, $temporada);
+    }
+
+    public function editarEstado($nombre, $temporada, $ATR){
+        $tabla = self::tabla;
+        $primaryKey= "nombre, temporada";
+        return $this->sqlEditar($tabla, "estado", $ATR, $primaryKey, $nombre, $temporada);
+    }
+>>>>>>> 9f4ce554dc0800e553d7918b9bad5746f2335d54
 ///////////////////Get
 ///////////////////Group
 ///////////////////////////////
@@ -30,7 +44,4 @@ class ModeloEstados extends ModeloConexion
         return $this->count($sql);
     }
 }
-
-
-
 ?>
