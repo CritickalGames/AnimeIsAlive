@@ -8,24 +8,16 @@ function main() {
     
     document.getElementById("nombreANIME")
         .addEventListener("keyup", actualizarLista);
-    document.getElementById("sANIME")
+    document.getElementById("selector")
         .addEventListener("change", selectAnime);
-    document.getElementById("btnANIME")
-        .addEventListener("click", btnAnime);
+    document.getElementById("boton")
+        .addEventListener("click", boton);
 }
 function actualizarLista() {
-    let select = $("#sANIME").val();
+    let select = $("#selector").val();
     let nombre = document.getElementById("nombreANIME").value;
     
     switch (select) {
-        case "Contar":
-        break;
-        case "Nuevo Capitulo":
-            BuscarAnimeNombre(["ANIME", nombre]);
-        break;
-        case "Editar Estado":
-            BuscarAnimeNombre(["ANIME", nombre]);
-        break;
         case "Buscar":
             BuscarAnimeAll(["ANIME", nombre]);
         break;
@@ -36,11 +28,11 @@ function actualizarLista() {
     }
 }
 function selectAnime() {
-    let select = $("#sANIME").val();
-    let btn = $("#btnANIME");
+    let select = $("#selector").val();
+    let btn = $("#boton");
     btn.text(select);
 
-    $("#btnANIME").prop('disabled', false);
+    $("#boton").prop('disabled', false);
     $("#nombreANIME").prop('disabled', false).attr("placeholder", "Nombre");
     $("#temporadaESTADO").prop('disabled', false).attr("placeholder", "Temporada");
     $("#capituloESTADO").prop('disabled', false).attr("placeholder", "Capitulo");
@@ -61,14 +53,14 @@ function selectAnime() {
             $("#opinon").prop('disabled', true);
         break;
         case "Buscar":
-            $("#btnANIME").prop('disabled', true);
+            $("#boton").prop('disabled', true);
             $("#temporadaESTADO").prop('disabled', true);
             $("#capituloESTADO").prop('disabled', true);
             $("#estadoESTADO").prop('disabled', true);
             $("#opinon").prop('disabled', true);
         break;
         case "Editar":
-            $("#btnANIME").prop('disabled', true);
+            $("#boton").prop('disabled', true);
             $("#nombreANIME").prop('disabled', true);
             $("#temporadaESTADO").prop('disabled', true);
             $("#capituloESTADO").prop('disabled', true);
@@ -77,7 +69,7 @@ function selectAnime() {
         break;
         case "Listar":
             ListarAnime(["Anime"]);
-            $("#btnANIME").prop('disabled', true);
+            $("#boton").prop('disabled', true);
             $("#temporadaESTADO").prop('disabled', true);
             $("#capituloESTADO").prop('disabled', true);
             $("#estadoESTADO").prop('disabled', true);
@@ -93,7 +85,7 @@ function selectAnime() {
         break;
         case "Contar":
             ContarAnime(["Anime"]);
-            $("#btnANIME").prop('disabled', true);
+            $("#boton").prop('disabled', true);
             $("#nombreANIME").prop('disabled', true);
             $("#temporadaESTADO").prop('disabled', true);
             $("#capituloESTADO").prop('disabled', true);
@@ -114,8 +106,8 @@ function selectAnime() {
     //alert("Ejecutado el SELECT");
     actualizarLista();
 }
-function btnAnime() {
-    let btn = $("#btnANIME");
+function boton() {
+    let btn = $("#boton");
     let nombre = document.getElementById("nombreANIME").value;
     let temporada = document.getElementById("temporadaESTADO").value;
     let capitulo = document.getElementById("capituloESTADO").value;

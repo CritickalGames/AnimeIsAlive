@@ -7,36 +7,23 @@ class ModeloAnime extends ModeloConexion
 {
 
     const tabla="anime";
+    const nombreClave="nombre";
+    const nombreColumnas="nombre";
 
-    public function set($NAME){
+    public function setAnime($valorClave){
         $tabla = self::tabla;
-        return $this->sqlSet($tabla, "nombre", "'$NAME'");
+        $nombreColumnas = self::nombreColumnas;
+        return $this->sqlSet($tabla, $nombreColumnas, $valorClave);
     }
 ///////////////////Borrar
-    public function borrar($NAME){
+    public function borrarAnime($valorClave){
         $tabla = self::tabla;
-        return $this->sqlBorrar($tabla, "nombre", $NAME);
+        $nombreClave = self::nombreClave;
+        return $this->sqlSet($tabla, $nombreClave, $valorClave);
     }
 ///////////////////Search
-    public function buscarPorNombre($Name){
-        $tabla = self::tabla;
-        return $this->sqlBuscar($tabla, "nombre", "$Name%");
-    }
-    public function buscarPorAll($Name){
-        $tabla = self::tabla;
-        return $this->sqlBuscar($tabla, "nombre", "%$Name%");
-    }
 ///////////////////Edit
-
 ///////////////////Get
-    public function getByInicial($Inicial){
-        $tabla = self::tabla;
-        return $this->sqlGetByLike($tabla, "nombre", "$Inicial%");
-    }
-    public function getByNombre($Nombre){
-        $tabla = self::tabla;
-        return $this->sqlGetBy($tabla, "nombre", $Nombre);
-    }
 ///////////////////Group
 ///////////////////////////////
     public function get_ALL(){
@@ -44,7 +31,7 @@ class ModeloAnime extends ModeloConexion
         return $this->sqlGet($tabla);
     }
 
-    public function contar(){
+    public function contarAnime(){
         $tabla = self::tabla;
         return $this->sqlCount($tabla);
     }

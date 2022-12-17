@@ -19,7 +19,7 @@
     <div class="col">
         <table class="table table-bordered border-dark table-primary" id="tableAnime">
             <tr>
-                <th><button id="btnANIME">Subir</button></th>
+                <th><button id="boton">Subir</button></th>
                 <th><input id="nombreANIME" type="text"></th>
                 <th><input id="temporadaESTADO" type="text"></th>
                 <th><input id="capituloESTADO" type="text"></th>
@@ -30,22 +30,20 @@
                         <option value="ver pelicula">pelicula</option>
                         <option value="vista pelicula">pelicula vista</option>
                     </select></th>
-                <th><input id="opinon" type="text"></th>
+                <th><input id="opinon" type="number" min="0" max="100" value="0"></th>
             </tr>
             <tr id="noBorrar">
                 <th>
-                    <select id="sANIME">
+                    <select id="selector">
                         <option value="Subir">Subir</option>
                         <option value="Borrar">Borrar</option>
                         <option value="Buscar">Buscar</option>
-                        <!--<option value="Editar">Editar</option>-->
                         <option value="Listar">Listar</option>
-                        <!--<option value="Inicial">Inicial</option>-->
                         <option value="Contar">Contar</option>
 
-                        <option value="Editar Estado">Editar Estado</option>
                         <option value="Nuevo Capitulo">Nuevo Capitulo</option>
-                        <option value="Opinar">Opinar</option>
+                        <option value="Editar Estado">Editar Estado</option>
+                        <option value="Opinar">Opinar NO FUNCIONA</option>
 
                     </select>
                 </th>
