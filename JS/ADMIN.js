@@ -2,149 +2,57 @@ window.addEventListener("load", main);
 
 
 function main() {
-    //alert("Inicia");
-    selectAnime();
+    select();
     
-    
-    document.getElementById("nombreANIME")
+    document.getElementById("ci")
         .addEventListener("keyup", actualizarLista);
-    document.getElementById("sANIME")
-        .addEventListener("change", selectAnime);
-    document.getElementById("btnANIME")
-        .addEventListener("click", btnAnime);
+    document.getElementById("select")
+        .addEventListener("change", select);
+    document.getElementById("btn")
+        .addEventListener("click", btn);
 }
 function actualizarLista() {
-    let select = $("#sANIME").val();
-    let nombre = document.getElementById("nombreANIME").value;
+    let select = $("#select").val();
+    //let nombre = document.getElementById("nombre").value;
     
     switch (select) {
-        case "Contar":
-        break;
-        case "Nuevo Capitulo":
-            BuscarAnimeNombre([nombre]);
-        break;
-        case "Editar Estado":
-            BuscarAnimeNombre([nombre]);
-        break;
-        case "Buscar":
-            BuscarAnimeAll([nombre]);
-        break;
         default:
             //alert("Ejecutado el Enlistar");
-            BuscarAnimeNombre([nombre]);
+            Listar();
             break;
     }
 }
-function selectAnime() {
-    let select = $("#sANIME").val();
-    let btn = $("#btnANIME");
+function select() {
+    let select = $("#select").val();
+    let btn = $("#btn");
     btn.text(select);
 
-    $("#btnANIME").prop('disabled', false);
-    $("#nombreANIME").prop('disabled', false).attr("placeholder", "Nombre");
-    $("#temporadaESTADO").prop('disabled', false).attr("placeholder", "Temporada");
-    $("#capituloESTADO").prop('disabled', false).attr("placeholder", "Capitulo");
-    $("#estadoESTADO").prop('disabled', false).attr("placeholder", "Estado");
-    $("#opinon").prop('disabled', false).attr("placeholder", "Opinión");
-
     switch (select) {
-        case "Subir":
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Borrar":
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Buscar":
-            $("#btnANIME").prop('disabled', true);
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Editar":
-            $("#btnANIME").prop('disabled', true);
-            $("#nombreANIME").prop('disabled', true);
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Listar":
-            ListarAnime([]);
-            $("#btnANIME").prop('disabled', true);
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Inicial":
-            actualizarLista();
 
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Contar":
-            ContarAnime([]);
-            $("#btnANIME").prop('disabled', true);
-            $("#nombreANIME").prop('disabled', true);
-            $("#temporadaESTADO").prop('disabled', true);
-            $("#capituloESTADO").prop('disabled', true);
-            $("#estadoESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Editar Estado":
-            $("#capituloESTADO").prop('disabled', true);
-            $("#opinon").prop('disabled', true);
-        break;
-        case "Nuevo Capitulo":
-            $("#opinon").prop('disabled', true);
-        break;
-    
         default:
             break;
     }
-    //alert("Ejecutado el SELECT");
     actualizarLista();
 }
-function btnAnime() {
-    let btn = $("#btnANIME");
-    let nombre = document.getElementById("nombreANIME").value;
-    let temporada = document.getElementById("temporadaESTADO").value;
-    let capitulo = document.getElementById("capituloESTADO").value;
-    let estado = document.getElementById("estadoESTADO").value;
+function btn() {
+    let btn = $("#btn");
+    let asiento = $("#asiento").val();
+    let ci = $("#ci").val();
+    let nombre = $("#nombre").val();
+    let apellido = $("#apellido").val();
+    let email = $("#email").val();
     switch (btn.text()) {
-        case "Subir":
-            SubirAnime([nombre]);
+        case "Registrar":
+            Registrar([asiento, ci, nombre, apellido, email]);
         break;
-        case "Borrar":
-            BorrarAnime([nombre]);
-        break;
-        case "Buscar":
-        break;
-        case "Editar":
+        case "Cancelar":
+            Cancelar([asiento]);
         break;
         case "Listar":
-            ListarAnime([]);
+            Listar([]);
         break;
-        case "Inicial":
-        break;
-        case "Contar":
-        break;
-        case "Nuevo Capitulo":
-            SubirEstado([nombre, temporada, capitulo, estado]);
-        break;
-        case "Editar Estado":
-            EditarEstado([nombre, temporada, estado]);
-        break;
-        case "Opinión":
+        case "Limpiar":
+            Limpiar([]);
         break;
         default:
             break;
@@ -154,50 +62,53 @@ function btnAnime() {
 
 
 ///////////////////////////////////////////////////////////////
-function tablaAnime(elemento, fila) {
+function tablaPasaje(elemento, fila) {
     //alert("entra");
+    let asiento = fila.insertCell();
+    let tipo = fila.insertCell();
+    let ci = fila.insertCell();
     let nombre = fila.insertCell();
-    if (elemento.nombre) {
+    let apellido = fila.insertCell();
+    let email = fila.insertCell();
+    if (elemento.asiento) {
+        asiento.innerHTML=elemento.asiento;
+        tipo.innerHTML=elemento.tipo;
+        ci.innerHTML=elemento.ci;
         nombre.innerHTML=elemento.nombre;
-        let temporada= elemento.temporada;
+        apellido.innerHTML=elemento.apellido;
+        email.innerHTML=elemento.email;
         
-        nombre.setAttribute("style", "cursor:pointer");
-        nombre.setAttribute("class", "btn-success text-dark");
-        nombre.addEventListener("click", (e)=>{
-            $("#nombreANIME").val(nombre.innerText);
-            $("#temporadaESTADO").val(temporada);
-            $as= $("#sANIME").val("Nuevo Capitulo");
+        ci.setAttribute("style", "cursor:pointer");
+        ci.setAttribute("class", "btn-success text-dark");
+        ci.addEventListener("click", (e)=>{
+            $("#asiento").val(asiento.innerText);
+            $("#tipo").val(tipo.innerText);
+            $("#ci").val(ci.innerText);
+            $("#nombre").val(nombre.innerText);
+            $("#apellido").val(apellido.innerText);
+            $("#email").val(email.innerText);
             actualizarLista();
         });
         
     }else{
-        nombre.innerHTML="";
+        nombre.innerHTML="1";
     }
-}
-
-function tablaEstado(elemento, fila){
-    if ((elemento.temporada)&&(elemento.capitulo)&&(elemento.estado)) {
-        let temporada = fila.insertCell();
-        temporada.innerHTML=elemento.temporada;
-        //alert("funciona");
-        let capitulo = fila.insertCell();
-        capitulo.innerHTML=elemento.capitulo;
-    
-        let estado = fila.insertCell();
-        estado.innerHTML=elemento.estado;
-    
+    if (elemento.ci) {
+        asiento.className ="bg-success";
+        tipo.className ="bg-success";
+        ci.className ="bg-success";
+        nombre.className ="bg-success";
+        apellido.className ="bg-success";
+        email.className ="bg-success";
     }else{
-        let temporada = fila.insertCell();
-        temporada.innerHTML="";
-        //alert("funciona");
-        let capitulo = fila.insertCell();
-        capitulo.innerHTML="";
-    
-        let estado = fila.insertCell();
-        estado.innerHTML="";
+        asiento.className ="bg-danger";
+        tipo.className ="bg-danger";
+        ci.className ="bg-danger";
+        nombre.className ="bg-danger";
+        apellido.className ="bg-danger";
+        email.className ="bg-danger";
     }
-    let celda5 = fila.insertCell();
-        celda5.innerHTML="";
+    
 }
 
 function celdaVacia(contenido, fila) {
@@ -206,169 +117,65 @@ function celdaVacia(contenido, fila) {
     vacio.innerHTML=contenido;
 }
 ///////////////////////////////////////////////////////////////
-function BorrarAnime(valores) {
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/ANIME/Borrar.php",
-        data:{nombre:valores[0]},
-        success:function(res){
-            //alert(res);
-            $("#nombreANIME").val(($("#nombreANIME").val().charAt(0)));
-            actualizarLista();
-            $("#nombreANIME").val("");
-        }
-    });
-}
 
-function BuscarAnimeAll(valores) {
-    $("#noBorrar").nextAll("tr").remove();
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/ANIME/BuscarAll.php",
-        data:{nombre:valores[0]},
-        dataType: "json",
-        success:function(res){
-            //alert(res);
-            let data = JSON.stringify(res);
-            data = JSON.parse(data);
-            let tabla = document.getElementById("tableAnime");
-            for (elemento of data) {
-                let fila = tabla.insertRow();
-                celdaVacia("", fila);
-                tablaAnime(elemento, fila);
-                tablaEstado(elemento, fila);
-            }
-        }
-    });
-}
-
-function BuscarAnimeNombre(valores) {
-    $("#noBorrar").nextAll("tr").remove();
-    //alert("Entrar al Buscar");
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/ANIME/BuscarNombre.php",
-        data:{nombre:valores[0]},
-        dataType: "json",
-        success:function(res){
-            //alert(res);
-            let data = JSON.stringify(res);
-            data = JSON.parse(data);
-            let tabla = document.getElementById("tableAnime");
-            for (elemento of data) {
-                let fila = tabla.insertRow();
-                celdaVacia("", fila);
-                tablaAnime(elemento, fila);
-                tablaEstado(elemento, fila);
-            }
-        }
-    });
-}
-
-function ContarAnime(valores) {
+function Listar() {
     $("#noBorrar").nextAll("tr").remove();
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/ANIME/Contar.php",
+        url:"PHP/COMUN/PASAJE/Listar.php",
         dataType: "json",
         success:function(res){
+
             let data = JSON.stringify(res);
             data = JSON.parse(data);
-            let tabla = document.getElementById("tableAnime");
-                //alert("entra");
-                let fila = tabla.insertRow();
-                celdaVacia(JSON.stringify(data), fila);
-                tablaAnime("", fila);
-                tablaEstado("", fila);
-        }
-    });
-}
-
-function EditarEstado(valores) {
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/ESTADOS/Editar.php",
-        data:{nombre:valores[0],temporada:valores[1],estado:valores[2]},
-        success:function(res){
-            actualizarLista()
-
-            //alert(res);
-            //valores[0] = valores[0].charAt(0);
-            //ListarPorInicialAnime([valores[0]]);
-            //alert(res);
-        }
-    });
-}
-
-function ListarPorInicialAnime(valores) {
-    $("#noBorrar").nextAll("tr").remove();
-
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/ANIME/Inicial.php",
-        data:{inicial:valores[0]},
-        dataType: "json",
-        success:function(res){
-            let data = JSON.stringify(res);
-            data = JSON.parse(data);
-            let tabla = document.getElementById("tableAnime");
+            let tabla = document.getElementById("table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
                 celdaVacia("", fila);
 
-                tablaAnime(elemento, fila);
-                tablaEstado(elemento, fila);
-            } 
-        }
-    });
-
-}
-
-function ListarAnime(valores) {
-    $("#noBorrar").nextAll("tr").remove();
-
-    $.ajax({
-        type:"POST",
-        url:"PHP/COMUN/ANIME/Listar.php",
-        dataType: "json",
-        success:function(res){
-            let data = JSON.stringify(res);
-            data = JSON.parse(data);
-            let tabla = document.getElementById("tableAnime");
-            for (elemento of data) {
-                let fila = tabla.insertRow();
-                celdaVacia("", fila);
-
-                tablaAnime(elemento, fila);
-                tablaEstado(elemento, fila);
+                tablaPasaje(elemento, fila);
             }  
         }
     });
 }
 
-function SubirAnime(valores) {
+function Registrar(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/ANIME/Subir.php",
-        data:{nombre:valores[0]},
-        //dataType: "json",
+        url:"PHP/COMUN/PASAJE/Registrar.php",
+        data:{asiento:valores[0],ci:valores[1], nombre:valores[2], apellido:valores[3], email:valores[4] },
         success:function(res){
+<<<<<<< HEAD
             alert(res);
+=======
+>>>>>>> origin/Prueba-para-el-profe
             actualizarLista();
+            //alert(res);
         }
     });
 }
 
-function SubirEstado(valores) {
+function Cancelar(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/COMUN/ESTADOS/Subir.php",
-        data:{nombre:valores[0],temporada:valores[1],capitulo:valores[2],estado:valores[3]},
+        url:"PHP/COMUN/PASAJE/Cancelar.php",
+        data:{asiento:valores[0]},
         success:function(res){
             actualizarLista()
+            //alert(res);
+        }
+    });
+}
 
+function Limpiar(valores) {
+
+    $.ajax({
+        type:"POST",
+        url:"PHP/COMUN/PASAJE/Limpiar.php",
+        success:function(res){
+            actualizarLista()
             //alert(res);
         }
     });
