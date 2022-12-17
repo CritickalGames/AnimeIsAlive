@@ -28,14 +28,14 @@ class ModeloEstados extends ModeloConexion
 ///////////////////Edit
     public function editarCapitulo($nombre, $temporada, $ATR){
         $tabla = self::tabla;
-        $clave= "nombre, temporada";
-        return $this->sqlEditar($tabla, "capitulo", $ATR, $clave, $nombre, $temporada);
+        $primaryKey= "nombre, temporada";
+        return $this->sqlEditar($tabla, "capitulo", $ATR, $primaryKey, $nombre, $temporada);
     }
 
     public function editarEstado($nombre, $temporada, $ATR){
         $tabla = self::tabla;
-        $clave= "nombre, temporada";
-        return $this->sqlEditar($tabla, "estado", $ATR, $clave, $nombre, $temporada);
+        $primaryKey= "nombre, temporada";
+        return $this->sqlEditar($tabla, "estado", $ATR, $primaryKey, $nombre, $temporada);
     }
 ///////////////////Get
     public function getByNombre($nombre){
@@ -79,7 +79,4 @@ class ModeloEstados extends ModeloConexion
         return $this->count($sql);
     }
 }
-
-
-
 ?>

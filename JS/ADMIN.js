@@ -21,17 +21,17 @@ function actualizarLista() {
         case "Contar":
         break;
         case "Nuevo Capitulo":
-            BuscarAnimeNombre(["ANIME", nombre]);
+            BuscarAnimeNombre([nombre]);
         break;
         case "Editar Estado":
-            BuscarAnimeNombre(["ANIME", nombre]);
+            BuscarAnimeNombre([nombre]);
         break;
         case "Buscar":
-            BuscarAnimeAll(["ANIME", nombre]);
+            BuscarAnimeAll([nombre]);
         break;
         default:
             //alert("Ejecutado el Enlistar");
-            BuscarAnimeNombre(["ANIME", nombre]);
+            BuscarAnimeNombre([nombre]);
             break;
     }
 }
@@ -76,7 +76,7 @@ function selectAnime() {
             $("#opinon").prop('disabled', true);
         break;
         case "Listar":
-            ListarAnime(["Anime"]);
+            ListarAnime([]);
             $("#btnANIME").prop('disabled', true);
             $("#temporadaESTADO").prop('disabled', true);
             $("#capituloESTADO").prop('disabled', true);
@@ -92,7 +92,7 @@ function selectAnime() {
             $("#opinon").prop('disabled', true);
         break;
         case "Contar":
-            ContarAnime(["Anime"]);
+            ContarAnime([]);
             $("#btnANIME").prop('disabled', true);
             $("#nombreANIME").prop('disabled', true);
             $("#temporadaESTADO").prop('disabled', true);
@@ -122,27 +122,27 @@ function btnAnime() {
     let estado = document.getElementById("estadoESTADO").value;
     switch (btn.text()) {
         case "Subir":
-            SubirAnime(["ANIME", nombre]);
+            SubirAnime([nombre]);
         break;
         case "Borrar":
-            BorrarAnime(["ANIME", nombre]);
+            BorrarAnime([nombre]);
         break;
         case "Buscar":
         break;
         case "Editar":
         break;
         case "Listar":
-            ListarAnime(["ANIME"]);
+            ListarAnime([]);
         break;
         case "Inicial":
         break;
         case "Contar":
         break;
         case "Nuevo Capitulo":
-            SubirEstado(["ESTADOS", nombre, temporada, capitulo, estado]);
+            SubirEstado([nombre, temporada, capitulo, estado]);
         break;
         case "Editar Estado":
-            EditarEstado(["ESTADOS", nombre, temporada, estado]);
+            EditarEstado([nombre, temporada, estado]);
         break;
         case "Opinión":
         break;
@@ -166,6 +166,7 @@ function tablaAnime(elemento, fila) {
         nombre.addEventListener("click", (e)=>{
             $("#nombreANIME").val(nombre.innerText);
             $("#temporadaESTADO").val(temporada);
+            $as= $("#sANIME").val("Nuevo Capitulo");
             actualizarLista();
         });
         
@@ -208,8 +209,8 @@ function celdaVacia(contenido, fila) {
 function BorrarAnime(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Borrar.php",
-        data:{nombre:valores[1]},
+        url:"PHP/COMUN/ANIME/Borrar.php",
+        data:{nombre:valores[0]},
         success:function(res){
             //alert(res);
             $("#nombreANIME").val(($("#nombreANIME").val().charAt(0)));
@@ -223,8 +224,8 @@ function BuscarAnimeAll(valores) {
     $("#noBorrar").nextAll("tr").remove();
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/BuscarAll.php",
-        data:{nombre:valores[1]},
+        url:"PHP/COMUN/ANIME/BuscarAll.php",
+        data:{nombre:valores[0]},
         dataType: "json",
         success:function(res){
             //alert(res);
@@ -246,8 +247,8 @@ function BuscarAnimeNombre(valores) {
     //alert("Entrar al Buscar");
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/BuscarNombre.php",
-        data:{nombre:valores[1]},
+        url:"PHP/COMUN/ANIME/BuscarNombre.php",
+        data:{nombre:valores[0]},
         dataType: "json",
         success:function(res){
             //alert(res);
@@ -269,7 +270,7 @@ function ContarAnime(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Contar.php",
+        url:"PHP/COMUN/ANIME/Contar.php",
         dataType: "json",
         success:function(res){
             let data = JSON.stringify(res);
@@ -287,14 +288,14 @@ function ContarAnime(valores) {
 function EditarEstado(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Editar.php",
-        data:{nombre:valores[1],temporada:valores[2],estado:valores[3]},
+        url:"PHP/COMUN/ESTADOS/Editar.php",
+        data:{nombre:valores[0],temporada:valores[1],estado:valores[2]},
         success:function(res){
             actualizarLista()
 
             //alert(res);
-            //valores[1] = valores[1].charAt(0);
-            //ListarPorInicialAnime(["ANIME", valores[1]]);
+            //valores[0] = valores[0].charAt(0);
+            //ListarPorInicialAnime([valores[0]]);
             //alert(res);
         }
     });
@@ -305,8 +306,8 @@ function ListarPorInicialAnime(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Inicial.php",
-        data:{inicial:valores[1]},
+        url:"PHP/COMUN/ANIME/Inicial.php",
+        data:{inicial:valores[0]},
         dataType: "json",
         success:function(res){
             let data = JSON.stringify(res);
@@ -329,7 +330,7 @@ function ListarAnime(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Listar.php",
+        url:"PHP/COMUN/ANIME/Listar.php",
         dataType: "json",
         success:function(res){
             let data = JSON.stringify(res);
@@ -349,8 +350,8 @@ function ListarAnime(valores) {
 function SubirAnime(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Subir.php",
-        data:{nombre:valores[1]},
+        url:"PHP/COMUN/ANIME/Subir.php",
+        data:{nombre:valores[0]},
         //dataType: "json",
         success:function(res){
             alert(res);
@@ -363,8 +364,8 @@ function SubirEstado(valores) {
 
     $.ajax({
         type:"POST",
-        url:"PHP/"+valores[0]+"/Subir.php",
-        data:{nombre:valores[1],temporada:valores[2],capitulo:valores[3],estado:valores[4]},
+        url:"PHP/COMUN/ESTADOS/Subir.php",
+        data:{nombre:valores[0],temporada:valores[1],capitulo:valores[2],estado:valores[3]},
         success:function(res){
             actualizarLista()
 
