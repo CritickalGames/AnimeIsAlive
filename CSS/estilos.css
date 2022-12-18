@@ -37,3 +37,7 @@ td{
 table{
     border-collapse: separate;
 }
+
+body{
+    background-color:currentColor;
+}
