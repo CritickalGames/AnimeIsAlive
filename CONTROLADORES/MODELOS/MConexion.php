@@ -92,8 +92,8 @@ class ModeloConexion
     return $this->get($sql);
   }
 
-  public function sqlGetBy(string $tabla, string $columna, string $atr){
-        $sql="SELECT * FROM $tabla WHERE $columna = '$atr'";
+  public function sqlGetBy(string $tabla, string $nombreColumna, string $valorAtributo){
+        $sql="SELECT * FROM $tabla WHERE $nombreColumna = '$valorAtributo'";
         return $this->get($sql);
   }
 

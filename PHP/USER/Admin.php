@@ -2,12 +2,13 @@
 require_once "RAPIs.php";
 class UserAdmin{
 /////////PASAJE//////////////////////////
-const swAnime= "ANIME";
-const swEstado= "ESTADOS";
+const swAnimes= "ANIMES";
+const swEstados= "ESTADOS";
+const swPortadas= "PORTADAS";
 ///////////////////Set
-    function subirAnime($valorColumna){
+    function subirAnimes($valorColumna){
         $obj=new Backoffice();
-        $sw= self::swAnime;
+        $sw= self::swAnimes;
         return subir($sw,[$valorColumna]);
     }
 ///////////////////Borrar
@@ -16,21 +17,27 @@ const swEstado= "ESTADOS";
 ///////////////////Get
 ///////////////////Group
 ///////////////////Listar
-    function listarAnime(){
+    function listarAnimes(){
         $obj=new Backoffice();
-        $sw= self::swAnime;
+        $sw= self::swAnimes;
         return $obj->listar($sw,["", ""]);
     }
 
-    function listarAnime_nombre($valorColumna){
+    function listarAnimes_nombre($valorColumna){
         $obj=new Backoffice();
-        $sw= self::swAnime;
+        $sw= self::swAnimes;
         return $obj->listar($sw,["nombre",$valorColumna]);
     }
 
-    function listarEstado_nombre($valorColumna){
+    function listarPortadas_nombre($valorColumna){
         $obj=new Backoffice();
-        $sw= self::swEstado;
+        $sw= self::swPortadas;
+        return $obj->listar($sw,["nombre",$valorColumna]);
+    }
+
+    function listarEstados_nombre($valorColumna){
+        $obj=new Backoffice();
+        $sw= self::swEstados;
         return $obj->listar($sw,["", $valorColumna]);
     }
     

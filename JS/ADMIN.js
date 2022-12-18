@@ -110,17 +110,9 @@ function boton() {
     let capitulo = document.getElementById("capitulo").value;
     let estado = document.getElementById("estado").value;
     switch (btn.text()) {
-        case "Registrar":
-            Registrar([asiento, ci, nombre, apellido, email]);
-        break;
-        case "Cancelar":
-            Cancelar([asiento]);
-        break;
+        
         case "Listar":
             Listar([]);
-        break;
-        case "Limpiar":
-            Limpiar([]);
         break;
         default:
             break;
@@ -134,13 +126,28 @@ function tablaANIME(elemento, fila) {
     //alert("entra");
     let nombre = fila.insertCell();
     if (elemento.nombre) {
-        nombre.innerHTML=elemento.nombre;
+        let Pnombre = document.createElement("p");
+        let nodeN= document.createTextNode(elemento.nombre);
+        Pnombre.appendChild(nodeN);
         
-        nombre.setAttribute("style", "cursor:pointer");
-        nombre.setAttribute("class", "btn-success text-dark");
-        nombre.addEventListener("click", (e)=>{
+        nombre.appendChild(Pnombre);
+        
+        //nombre.innerHTML=elemento.nombre;
+        
+        fila.setAttribute("style", "cursor:pointer");
+        Pnombre.setAttribute("class", "d-flex justify-content-center align-items-center");
+
+        fila.addEventListener("click", (e)=>{
             $("#nombre").val(nombre.innerText);
             actualizarLista();
+        });
+
+        fila.addEventListener("mouseover", (e)=>{
+            fila.setAttribute("class", "table-warning");
+            
+        });
+        fila.addEventListener("mouseout", (e)=>{
+            fila.setAttribute("class", "");
         });
         
     }else{
@@ -153,11 +160,27 @@ function tablaESTADOS(elemento, fila) {
     let capitulo = fila.insertCell();
     let estado = fila.insertCell();
     if (elemento.temporada) {
-        temporada.innerHTML=elemento.temporada;
-        capitulo.innerHTML=elemento.capitulo;
-        estado.innerHTML=elemento.estado;
+        let Ptemporada = document.createElement("p");
+        let nodeT= document.createTextNode(elemento.temporada);
+        Ptemporada.appendChild(nodeT);
+        let Pcapitulo = document.createElement("p");
+        let nodeC= document.createTextNode(elemento.capitulo);
+        Pcapitulo.appendChild(nodeC);
+        let Pestado = document.createElement("p");
+        let nodeE= document.createTextNode(elemento.estado);
+        Pestado.appendChild(nodeE);
         
+        temporada.appendChild(Ptemporada);
+        capitulo.appendChild(Pcapitulo);
+        estado.appendChild(Pestado);
         
+        temporada.setAttribute("class", "contenedor");
+        capitulo.setAttribute("class", "contenedor");
+        estado.setAttribute("class", "contenedor");
+
+        Ptemporada.setAttribute("class", "d-flex justify-content-center align-items-center");
+        Pcapitulo.setAttribute("class", "d-flex justify-content-center align-items-center");
+        Pestado.setAttribute("class", "d-flex justify-content-center align-items-center");
     }else{
         temporada.innerHTML="";
         capitulo.innerHTML="";
@@ -173,12 +196,24 @@ function tablaOPINION(elemento, fila) {
         opinion.innerHTML="1";
     }
 }
-function celdaVacia(contenido, fila) {
+function celdaVacia(elemento, fila) {
     let vacio = fila.insertCell();
-                
-    vacio.innerHTML=contenido;
+    let img = document.createElement("img");
+    if (elemento.url!=null) {
+        let url= elemento.url
+        img.setAttribute("src", url);
+        img.setAttribute("class", "portada rounded mx-auto d-block");
+        vacio.setAttribute("class", "table-dark");
+        vacio.appendChild(img);
+    }
 }
 
+function tablaGeneral(elemento, fila){
+    celdaVacia(elemento, fila);
+    tablaANIME(elemento, fila);
+    tablaESTADOS(elemento, fila);
+    tablaOPINION(elemento, fila);
+}
 
 ///////////////////////////////////////////////////////////////
 function BuscarAnimeNombre(valores) {
@@ -189,21 +224,16 @@ function BuscarAnimeNombre(valores) {
         data:{nombre:valores[0]},
         dataType: "json",
         success:function(res){
-            //alert(res);
             let data = JSON.stringify(res);
             data = JSON.parse(data);
             let tabla = document.getElementById("table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
-                celdaVacia("", fila);
-
-                tablaANIME(elemento, fila);
-                tablaESTADOS(elemento, fila);
-                tablaOPINION(elemento, fila);
+                tablaGeneral(elemento, fila);
             }  
         },
         error: function(res){
-            alert(res);
+            //alert(res);
         }
     });
 }
@@ -222,10 +252,8 @@ function Listar() {
             let tabla = document.getElementById("table");
             for (elemento of data) {
                 let fila = tabla.insertRow();
-                celdaVacia("", fila);
-
-                tablaANIME(elemento, fila);
-                tablaESTADOS(elemento, fila);
+                
+                tablaGeneral(elemento, fila)
             }  
         }
     });

@@ -5,12 +5,22 @@ require_once "../../USER/Admin.php";
     //$nombre = "Z";
     //$nombre = "a";
     if (($nombre!=NULL)) {
-        $animes=($objUserAdmin->listarAnime_nombre($nombre));
-        $estados=($objUserAdmin->listarEstado_nombre($nombre));
-        
+        $animes=($objUserAdmin->listarAnimes_nombre($nombre));
+        $estados=($objUserAdmin->listarEstados_nombre($nombre));
+        $portadas=($objUserAdmin->listarPortadas_nombre($nombre));
+
         foreach ($animes as $key => $value) {
             $array;
             $array[$key]=$value;
+            foreach ($portadas as $portadaK => $portadaV) {
+                
+                if ($portadaV) {
+                    if (($value["nombre"]==$portadaV["nombre"])) {
+                        $array[$key]=$portadaV;
+                    }else {
+                    }
+                }
+            }
             foreach ($estados as $estadoK => $estadoV) {
                 if ($estadoV) {
                     if (($value["nombre"]==$estadoV["nombre"])) {
@@ -22,13 +32,22 @@ require_once "../../USER/Admin.php";
         }
         echo json_encode($array);
     }else{
-        $animes=($objUserAdmin->listarAnime_nombre("A"));
-        $estados=($objUserAdmin->listarEstado_nombre("A"));
-
+        $animes=($objUserAdmin->listarAnimes_nombre("A"));
+        $estados=($objUserAdmin->listarEstados_nombre("A"));
+        $portadas=($objUserAdmin->listarPortadas_nombre("A"));
+        
         foreach ($animes as $key => $value) {
             $array;
             $array[$key]=$value;
-            
+            foreach ($portadas as $portadaK => $portadaV) {
+                
+                if ($portadaV) {
+                    if (($value["nombre"]==$portadaV["nombre"])) {
+                        $array[$key]=$portadaV;
+                    }else {
+                    }
+                }
+            }
             foreach ($estados as $estadoK => $estadoV) {
                 if ($estadoV) {
                     if (($value["nombre"]==$estadoV["nombre"])) {

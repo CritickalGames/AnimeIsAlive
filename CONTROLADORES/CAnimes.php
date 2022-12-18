@@ -2,15 +2,15 @@
 
 require_once "RModelos.php";
 
-class ControladorAnime extends ModeloAnime
+class ControladorAnimes extends ModeloAnimes
 {
 
     public function set($valorColumna){
-        $this->setAnime($valorColumna);
+        $this->setAnimes($valorColumna);
     }
 ///////////////////Borrar
     public function borrar($valorColumna){
-        $this->borrarAnime($valorColumna);
+        $this->borrarAnimes($valorColumna);
     }
 ///////////////////Search
 ///////////////////Edit
@@ -22,11 +22,11 @@ class ControladorAnime extends ModeloAnime
     }
 
     public function listar_nombre($valorColumna){
-        return $this->getAnime_nombre("$valorColumna%");
+        return $this->getAnimes_nombre("$valorColumna%");
     }
 ///////////////////////////////
     public function contar(){
-        return $this->contarAnime();
+        return $this->contarAnimes();
     }
 }
 ?>
