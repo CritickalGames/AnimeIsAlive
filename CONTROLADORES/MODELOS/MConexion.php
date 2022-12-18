@@ -38,13 +38,13 @@ class ModeloConexion
     }
   }
 ////////////////////////////////////////////////
-  function colTOatr(string $columnas, array $atr){
+  function colTOatr(string $columnas, array $valoresATR){
     $col= str_word_count($columnas, 1);
     $clave= "";
-    foreach ($atr as $key => $value) {
+    foreach ($valoresATR as $key => $value) {
       $columna=$col[$key];
       $valor= $value[$key];
-      if ($key!=count($atr)-1 && count($atr)!=1) {
+      if ($key!=count($valoresATR)-1 && count($valoresATR)!=1) {
         $clave = $clave."$columna = '$valor' AND ";
       }else {
         $clave = $clave."$columna = '$valor'";
@@ -54,6 +54,20 @@ class ModeloConexion
     return $clave;
   }
 
+  function atrToString(array $valoresATR){
+    $clave= "";
+    foreach ($valoresATR as $key => $value) {
+      $valor= $value[$key];
+      if ($key!=count($valoresATR)-1 && count($valoresATR)!=1) {
+        $clave = $clave."'$valor', ";
+      }else {
+        $clave = $clave."'$valor'";
+      }
+    }
+
+    return $clave;
+  }
+////////////////////////////////////////////////
   public function sqlBorrar(string $tabla, string $nombreClave, ... $valorClave){
       $clave = $this->colTOatr($nombreClave, [$valorClave]);
     $sql = "DELETE FROM $tabla WHERE $clave";
@@ -108,9 +122,10 @@ class ModeloConexion
         return $this->get($sql);
   }
   
-  public function sqlSet(string $tabla, string $columna, string $NAME){
+  public function sqlSet(string $tabla, string $columna, ... $valorAtributos){
+        $valores= $this->atrToString([$valorAtributos]);
         $sql = "INSERT INTO $tabla ($columna) 
-            VALUES ($NAME)";
+            VALUES ($valores)";
     return $this->sentencia($sql);
   }
 }

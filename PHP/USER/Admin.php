@@ -9,7 +9,7 @@ const swPortadas= "PORTADAS";
     function subirAnimes($valorColumna){
         $obj=new Backoffice();
         $sw= self::swAnimes;
-        return subir($sw,[$valorColumna]);
+        return $obj->subir($sw,[$valorColumna]);
     }
 ///////////////////Borrar
 ///////////////////Search

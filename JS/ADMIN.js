@@ -110,7 +110,9 @@ function boton() {
     let capitulo = document.getElementById("capitulo").value;
     let estado = document.getElementById("estado").value;
     switch (btn.text()) {
-        
+        case "Subir":
+            SubirAnime([nombre]);
+        break;
         case "Listar":
             Listar([]);
         break;
@@ -151,7 +153,7 @@ function tablaANIME(elemento, fila) {
         });
         
     }else{
-        nombre.innerHTML="1";
+        nombre.innerHTML="";
     }
 }
 function tablaESTADOS(elemento, fila) {
@@ -193,7 +195,7 @@ function tablaOPINION(elemento, fila) {
     if (elemento.opinion) {
         opinion.innerHTML=elemento.opinion;
     }else{
-        opinion.innerHTML="1";
+        opinion.innerHTML="SIN CONFIGURAR";
     }
 }
 function celdaVacia(elemento, fila) {
@@ -255,6 +257,21 @@ function Listar() {
                 
                 tablaGeneral(elemento, fila)
             }  
+        }
+    });
+}
+
+function SubirAnime(valores) {
+    $.ajax({
+        type:"POST",
+        url:"PHP/PROB/ANIME/Subir.php",
+        data:{nombre:valores[0]},
+        success:function(res){
+            //alert(res);
+            actualizarLista();
+        },
+        error: function(res){
+            //alert(res);
         }
     });
 }

@@ -1,5 +1,5 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../USER/Admin.php";
     $objUserAdmin = new UserAdmin();
 
     
@@ -7,7 +7,7 @@ require_once "../USER/Admin.php";
     $nombre = $_POST['nombre'];
 
     if ($nombre!= NULL) {
-        var_dump($objUserAdmin->subirAnime("$nombre"));
+        var_dump($objUserAdmin->subirAnimes("$nombre"));
     }else{
         echo "Algo salió mal";
     }
