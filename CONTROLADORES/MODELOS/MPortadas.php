@@ -3,30 +3,29 @@
 require_once "MConexion.php";
 
 
-class ModeloAnime extends ModeloConexion
+class ModeloPortadas extends ModeloConexion
 {
 
-    const tabla="anime";
+    const tabla="portadas";
     const nombreClave="nombre";
     const nombreColumnas="nombre";
 
-    public function setAnime($valorClave){
+    public function setPortadas($valorClave){
         $tabla = self::tabla;
         $nombreColumnas = self::nombreColumnas;
         return $this->sqlSet($tabla, $nombreColumnas, $valorClave);
     }
 ///////////////////Borrar
-    public function borrarAnime($valorClave){
+    public function borrarPortadas($valorClave){
         $tabla = self::tabla;
         $nombreClave = self::nombreClave;
         return $this->sqlBorrar($tabla, $nombreClave, $valorClave);
     }
-///////////////////Search
 ///////////////////Edit
 ///////////////////Get
-    public function getAnime_nombre($valorColumna){
+    public function getPortadas_nombre($valorColumna){
         $tabla = self::tabla;
-        return $this->sqlGetByLike($tabla, "nombre", $valorColumna);
+        return $this->sqlGetByLike($tabla, "nombre", "$valorColumna%");
     }
 ///////////////////Group
 ///////////////////////////////
@@ -35,7 +34,7 @@ class ModeloAnime extends ModeloConexion
         return $this->sqlGet($tabla);
     }
 
-    public function contarAnime(){
+    public function contarPortadas(){
         $tabla = self::tabla;
         return $this->sqlCount($tabla);
     }

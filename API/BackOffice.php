@@ -7,8 +7,8 @@ class Backoffice{
     function borrar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
+            case "animes":
+                $obj = new ControladorAnimes();
                 $obj->borrar(
                         $valores[0]);
                 break;
@@ -18,8 +18,8 @@ class Backoffice{
     function buscar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
+            case "animes":
+                $obj = new ControladorAnimes();
                 $by = "buscarBy".$valores[0];
                 return ($obj->{$by}($valores[1]));
                 break;
@@ -29,8 +29,8 @@ class Backoffice{
     function contar(string $tabla){
         
         switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
+            case "animes":
+                $obj = new ControladorAnimes();
                 return $obj->contar();
                 break;
         }
@@ -40,8 +40,8 @@ class Backoffice{
     function editar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
+            case "animes":
+                $obj = new ControladorAnimes();
                 $by = "editar".$valores[0];
                 return ($obj->{$by}(
                         $valores[1],
@@ -54,8 +54,8 @@ class Backoffice{
     function listar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
+            case "animes":
+                $obj = new ControladorAnimes();
                 $by = "listar_".$valores[0];
                 return ($obj->{$by}(
                     $valores[1]
@@ -68,14 +68,21 @@ class Backoffice{
                     $valores[1]
                 ));
             break;
+            case "portadas":
+                $obj = new ControladorPortadas();
+                $by = "listar_".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1]
+                ));
+            break;
         }
         
     }
     function subir(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
-            case "anime":
-                $obj = new ControladorAnime();
+            case "animes":
+                $obj = new ControladorAnimes();
                 ($obj->set(
                     $valores[0]
                 ));
