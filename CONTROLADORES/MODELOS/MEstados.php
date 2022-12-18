@@ -7,13 +7,13 @@ class ModeloEstados extends ModeloConexion
 {
 
     const tabla="estados";
-    const nombreClave="nombre";
-    const nombreColumnas="nombre";
+    const nombreClave="nombre, temporada";
+    const nombreColumnas="nombre, temporada, capitulo, estado";
 
-    public function setEstados($valorClave){
+    public function setEstados($valorClave1, $valorClave2){
         $tabla = self::tabla;
         $nombreColumnas = self::nombreColumnas;
-        return $this->sqlSet($tabla, $nombreColumnas, $valorClave);
+        return $this->sqlSet($tabla, $nombreColumnas, $valorClave1, $valorClave2);
     }
 ///////////////////Borrar
     public function borrarEstados($valorClave){
@@ -29,7 +29,7 @@ class ModeloEstados extends ModeloConexion
         return $this->sqlGet($tabla, "nombre", $valorColumna);
     }
 ///////////////////Group
-    public function groupEstados_temporada_capitulo($valordeColumna){
+    public function groupEstados_temporada_capitulo_ByNombre($valordeColumna){
         $tabla = self::tabla;
         $sql = "SELECT * FROM $tabla e
         WHERE EXISTS(
@@ -40,6 +40,16 @@ class ModeloEstados extends ModeloConexion
             HAVING e.temporada= temporada
             )
         ";
+        return $this->get($sql);
+    }
+    public function groupEstados_temporada_capitulo(){
+        $sql="SELECT * FROM estados e
+        WHERE EXISTS(
+            SELECT nombre, max(temporada) AS temporada, capitulo, estado FROM estados
+            WHERE e.nombre= nombre
+            GROUP BY nombre
+            HAVING e.temporada= temporada
+        )";
         return $this->get($sql);
     }
 ///////////////////////////////

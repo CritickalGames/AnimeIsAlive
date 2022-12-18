@@ -18,7 +18,7 @@ class ControladorEstados extends ModeloEstados
 ///////////////////Group
 ///////////////////Listar
     public function listar_($valorColumnaDeCriterio){
-        return $this->groupEstados_temporada_capitulo($valorColumnaDeCriterio);
+        return $this->groupEstados_temporada_capitulo_ByNombre($valorColumnaDeCriterio);
     }
 ///////////////////////////////
     public function contar(){
