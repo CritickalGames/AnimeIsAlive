@@ -12,6 +12,11 @@ const swPortadas= "PORTADAS";
         return $obj->subir($sw,[$valorColumna]);
     }
 ///////////////////Borrar
+    function borrarAnimes($valorColumna){
+        $obj=new Backoffice();
+        $sw= self::swAnimes;
+        return $obj->borrar($sw,[$valorColumna]);
+    }
 ///////////////////Search
 ///////////////////Edit
 ///////////////////Get

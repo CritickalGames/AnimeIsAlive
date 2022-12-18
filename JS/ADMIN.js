@@ -113,6 +113,9 @@ function boton() {
         case "Subir":
             SubirAnime([nombre]);
         break;
+        case "Borrar":
+            BorrarAnime([nombre]);
+        break;
         case "Listar":
             Listar([]);
         break;
@@ -269,6 +272,23 @@ function SubirAnime(valores) {
         success:function(res){
             //alert(res);
             actualizarLista();
+        },
+        error: function(res){
+            //alert(res);
+        }
+    });
+}
+
+function BorrarAnime(valores) {
+    $.ajax({
+        type:"POST",
+        url:"PHP/PROB/ANIME/Borrar.php",
+        data:{nombre:valores[0]},
+        success:function(res){
+            //alert(res);
+            $("#nombre").val($("#nombre").val().charAt(0));
+                actualizarLista();
+            $("#nombre").val("");
         },
         error: function(res){
             //alert(res);
