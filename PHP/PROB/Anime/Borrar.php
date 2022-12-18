@@ -1,5 +1,5 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../USER/Admin.php";
     $objUserAdmin = new UserAdmin();
 
     $nombre = strtoupper($_POST['nombre']);
@@ -8,7 +8,7 @@ require_once "../USER/Admin.php";
     if (($nombre!=NULL)) {
         //$estado=$objUserAdmin->getEstadosByNombre($nombre);
         //$objUserAdmin->borrarEstados($estado[0]["nombre"],$estado[0]["temporada"]);
-        //$objUserAdmin->borrarAnime($nombre);
+        $objUserAdmin->borrarAnimes($nombre);
     }else{
         echo "Inicial: $nombre <br>";
     }

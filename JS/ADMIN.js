@@ -285,13 +285,13 @@ function BorrarAnime(valores) {
         url:"PHP/PROB/ANIME/Borrar.php",
         data:{nombre:valores[0]},
         success:function(res){
-            //alert(res);
+            alert(res);
             $("#nombre").val($("#nombre").val().charAt(0));
                 actualizarLista();
             $("#nombre").val("");
         },
         error: function(res){
-            //alert(res);
+            alert(res);
         }
     });
 }
