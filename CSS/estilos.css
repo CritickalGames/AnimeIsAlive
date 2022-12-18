@@ -23,7 +23,6 @@ input{
 }
 
 td{
-    border: solid;
     border-top-width: 30px;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
