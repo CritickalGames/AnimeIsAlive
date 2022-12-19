@@ -1,5 +1,5 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../USER/Admin.php";
     $obj = new UserAdmin();
 
     
@@ -22,21 +22,19 @@ require_once "../USER/Admin.php";
         }elseif (intval($capitulo)>0) {
             $estado="viendo";
         }
-        var_dump ($obj->getEstadosByID($nombre, $temporada)[0]);
-        echo "\n$nombre";
-        echo "\n";
-        var_dump ($obj->getEstadosByNombre($nombre, $temporada)[0]);
-        echo "\n";
-        var_dump ($obj->getAnimeByNombre("Z"));
-        echo "\n";
 
-        if (($obj->getEstadosByID($nombre, $temporada)[0])!=0) {
+        var_dump($obj->getEstados_ByPK($nombre, $temporada));
+
+        if (($obj->getEstados_ByPK($nombre, $temporada)[0])!=0) {
             echo "Hay una temporada";
-            echo ($obj->editarEstadosCapitulo($nombre, $temporada, $capitulo));
-            ($obj->editarEstadosEstado($nombre, $temporada, $estado));
-        }elseif(!($obj->getEstadosByID($nombre, $temporada)[0])) {
-            echo "<br>No hay ninguna temporada";
-            $obj->subirEstados($nombre, $temporada, $capitulo, $estado);
+            echo"<br><br>EDITAR CAPITLO<br>";
+            var_dump($obj->editarEstados_Capitulo($nombre, $temporada, $capitulo));
+            echo"<br>";
+            echo"<br>EDITAR ESTADO<br>";
+            var_dump($obj->editarEstados_Estado($nombre, $temporada, $estado));
+        }elseif(!($obj->getEstados_ByPK($nombre, $temporada)[0])) {
+            echo "<br>No hay ninguna temporada<br>";
+            echo($obj->subirEstados($nombre, $temporada, $capitulo, $estado));
         }else{
             echo "La clave está bien, pero nada más";
         }

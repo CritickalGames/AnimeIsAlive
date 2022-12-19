@@ -23,7 +23,9 @@ class ModeloConexion
 
   public function sentencia(string $sql){
     if ($this->enviarConsulta($sql)) {
-      return "-SENTENCIA ENVAIDA";
+      return "-SENTENCIA ENVAIDA <br>---<br>$sql";
+    }else {
+      return "-SENTENCIA ERROR <br>---<br>$sql";
     }
   }
 
@@ -38,12 +40,14 @@ class ModeloConexion
     }
   }
 ////////////////////////////////////////////////
-  function colTOatr(string $columnas, array $valoresATR){
+  function colSAMEvalor(string $columnas, $valoresATR){
     $col= str_word_count($columnas, 1);
     $clave= "";
+
     foreach ($valoresATR as $key => $value) {
       $columna=$col[$key];
-      $valor= $value[$key];
+
+      $valor= $valoresATR[$key];
       if ($key!=count($valoresATR)-1 && count($valoresATR)!=1) {
         $clave = $clave."$columna = '$valor' AND ";
       }else {
@@ -54,10 +58,10 @@ class ModeloConexion
     return $clave;
   }
 
-  function atrToString(array $valoresATR){
+  function convertirATRtoSTRING($valoresATR){
     $clave= "";
-    foreach ($valoresATR as $key => $value) {
-      $valor= $value[$key];
+    foreach ($valoresATR as $key=>$valor) {
+      $valor= $valoresATR[$key];
       if ($key!=count($valoresATR)-1 && count($valoresATR)!=1) {
         $clave = $clave."'$valor', ";
       }else {
@@ -67,9 +71,23 @@ class ModeloConexion
 
     return $clave;
   }
+
+  function convertirCOLtoSTRINGNombres($valoresATR){
+    $clave= "";
+    foreach ($valoresATR as $key=>$valor) {
+      $valor= $valoresATR[$key];
+      if ($key!=count($valoresATR)-1 && count($valoresATR)!=1) {
+        $clave = $clave."`$valor`, ";
+      }else {
+        $clave = $clave."`$valor`";
+      }
+    }
+
+    return $clave;
+  }
 ////////////////////////////////////////////////
   public function sqlBorrar(string $tabla, string $nombreClave, ... $valorClave){
-      $clave = $this->colTOatr($nombreClave, [$valorClave]);
+      $clave = $this->colSAMEvalor($nombreClave, $valorClave);
     $sql = "DELETE FROM $tabla WHERE $clave";
     return $this->sentencia($sql);
   }
@@ -85,19 +103,19 @@ class ModeloConexion
     return mysqli_num_rows($result);
   }
 
-  public function sqlEditar(string $tabla, string $columna, string $atr, string $columnas, ... $valorClave){
-    $clave = $this->colTOatr($columnas, [$valorClave]);
-    $sql = "UPDATE $tabla 
-        SET $columna='$atr' 
-        WHERE $clave";
-        return $this->sentencia($sql);
-  }
-
   public function sqlCancelar(string $tabla, string $columna, string $columnas, ... $atributos){
-    $clave = $this->colTOatr($columnas, $atributos);
+    $clave = $this->colSAMEvalor($columnas, $atributos);
     $sql = "UPDATE $tabla 
         SET $columna=NULL
         WHERE $clave ";
+        return $this->sentencia($sql);
+  }
+
+  public function sqlEditar(string $tabla, string $columnaAEditar, string $nuevoValor, string $columnas, ... $valorClave){
+    $clave = $this->colSAMEvalor($columnas, $valorClave);
+    $sql = "UPDATE $tabla 
+        SET $columnaAEditar='$nuevoValor' 
+        WHERE $clave";
         return $this->sentencia($sql);
   }
 
@@ -106,9 +124,10 @@ class ModeloConexion
     return $this->get($sql);
   }
 
-  public function sqlGetBy(string $tabla, string $nombreColumna, string $valorAtributo){
-        $sql="SELECT * FROM $tabla WHERE $nombreColumna = '$valorAtributo'";
-        return $this->get($sql);
+  public function sqlGetBy(string $tabla, string $nombreColumna, ... $valorAtributo){
+      $clave = $this->colSAMEvalor($nombreColumna, $valorAtributo);
+      $sql="SELECT * FROM $tabla WHERE $clave";
+      return $this->get($sql);
   }
 
   public function sqlGetByLike(string $tabla, string $columna, string $atr){
@@ -117,13 +136,14 @@ class ModeloConexion
   }
 
   public function sqlGetByClave(string $tabla, string $columna, ...$atr){
-        $clave = $this->colTOatr($columna, [$valorClave]);
+        $clave = $this->colSAMEvalor($columna, $valorClave);
         $sql="SELECT * FROM $tabla WHERE $clave";
         return $this->get($sql);
   }
   
-  public function sqlSet(string $tabla, string $columna, ... $valorAtributos){
-        $valores= $this->atrToString([$valorAtributos]);
+  public function sqlSet(string $tabla, array $columna, ... $valorAtributos){
+        $valores= $this->convertirATRtoSTRING($valorAtributos);
+        $columna= $this->convertirCOLtoSTRINGNombres($columna);
         $sql = "INSERT INTO $tabla ($columna) 
             VALUES ($valores)";
     return $this->sentencia($sql);

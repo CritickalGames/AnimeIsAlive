@@ -17,11 +17,11 @@ function actualizarLista() {
     
     switch (select) {
         case "Buscar":
-            BuscarAnimeAll([nombre]);
+            BuscarAnimesAll([nombre]);
         break;
         default:
             //alert("Ejecutado el Enlistar");
-            BuscarAnimeNombre([nombre]);
+            BuscarAnimesNombre([nombre]);
             break;
     }
 }
@@ -66,7 +66,7 @@ function select() {
             $("#opinon").prop('disabled', true);
         break;
         case "Listar":
-            ListarAnime(["Anime"]);
+            ListarAnimes(["Animes"]);
             $("#boton").prop('disabled', true);
             $("#temporada").prop('disabled', true);
             $("#capitulo").prop('disabled', true);
@@ -82,7 +82,7 @@ function select() {
             $("#opinon").prop('disabled', true);
         break;
         case "Contar":
-            ContarAnime(["Anime"]);
+            ContarAnimes(["Animes"]);
             $("#boton").prop('disabled', true);
             $("#nombre").prop('disabled', true);
             $("#temporada").prop('disabled', true);
@@ -111,10 +111,10 @@ function boton() {
     let estado = document.getElementById("estado").value;
     switch (btn.text()) {
         case "Subir":
-            SubirAnime([nombre]);
+            SubirAnimes([nombre]);
         break;
         case "Borrar":
-            BorrarAnime([nombre]);
+            BorrarAnimes([nombre]);
         break;
         case "Listar":
             Listar([]);
@@ -127,7 +127,7 @@ function boton() {
 
 
 ///////////////////////////////////////////////////////////////
-function tablaANIME(elemento, fila) {
+function tablaANIMEs(elemento, fila) {
     //alert("entra");
     let nombre = fila.insertCell();
     if (elemento.nombre) {
@@ -215,17 +215,34 @@ function celdaVacia(elemento, fila) {
 
 function tablaGeneral(elemento, fila){
     celdaVacia(elemento, fila);
-    tablaANIME(elemento, fila);
+    tablaANIMEs(elemento, fila);
     tablaESTADOS(elemento, fila);
     tablaOPINION(elemento, fila);
 }
 
 ///////////////////////////////////////////////////////////////
-function BuscarAnimeNombre(valores) {
+function BorrarAnimes(valores) {
+    $.ajax({
+        type:"POST",
+        url:"PHP/PROB/ANIMES/Borrar.php",
+        data:{nombre:valores[0]},
+        success:function(res){
+            //alert(res);
+            $("#nombre").val($("#nombre").val().charAt(0));
+                actualizarLista();
+            $("#nombre").val("");
+        },
+        error: function(res){
+            alert(res);
+        }
+    });
+}
+
+function BuscarAnimesNombre(valores) {
     $("#noBorrar").nextAll("tr").remove();
     $.ajax({
         type:"POST",
-        url:"PHP/PROB/ANIME/BuscarNombre.php",
+        url:"PHP/PROB/ANIMES/BuscarNombre.php",
         data:{nombre:valores[0]},
         dataType: "json",
         success:function(res){
@@ -248,7 +265,7 @@ function Listar() {
 
     $.ajax({
         type:"POST",
-        url:"PHP/PROB/ANIME/Listar.php",
+        url:"PHP/PROB/ANIMES/Listar.php",
         dataType: "json",
         success:function(res){
 
@@ -264,10 +281,10 @@ function Listar() {
     });
 }
 
-function SubirAnime(valores) {
+function SubirAnimes(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/PROB/ANIME/Subir.php",
+        url:"PHP/PROB/ANIMES/Subir.php",
         data:{nombre:valores[0]},
         success:function(res){
             //alert(res);
@@ -279,19 +296,17 @@ function SubirAnime(valores) {
     });
 }
 
-function BorrarAnime(valores) {
+function SubirEstados(valores) {
     $.ajax({
         type:"POST",
-        url:"PHP/PROB/ANIME/Borrar.php",
-        data:{nombre:valores[0]},
+        url:"PHP/PROB/ESTADOS/Subir.php",
+        data:{nombre:valores[0], temporada:valores[1], capitulo:valores[2], estado:valores[3]},
         success:function(res){
-            alert(res);
-            $("#nombre").val($("#nombre").val().charAt(0));
-                actualizarLista();
-            $("#nombre").val("");
+            //alert(res);
+            actualizarLista();
         },
         error: function(res){
-            alert(res);
+            //alert(res);
         }
     });
 }

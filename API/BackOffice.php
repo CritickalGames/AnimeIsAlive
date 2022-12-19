@@ -11,7 +11,14 @@ class Backoffice{
                 $obj = new ControladorAnimes();
                 $obj->borrar(
                         $valores[0]);
-                break;
+            break;
+            case "estados":
+                $obj = new ControladorEstados();
+                $obj->borrar(
+                        $valores[0],
+                        $valores[1]
+                    );
+            break;
         }
     }
 
@@ -42,11 +49,39 @@ class Backoffice{
         switch (strtolower($tabla)) {
             case "animes":
                 $obj = new ControladorAnimes();
-                $by = "editar".$valores[0];
+                $by = "editar_".$valores[0];
+                return ($obj->{$by}(
+                        $valores[1],
+                        $valores[2]));
+            break;
+            case "estados":
+                $obj = new ControladorEstados();
+                $by = "editar_".$valores[0];
                 return ($obj->{$by}(
                         $valores[1],
                         $valores[2],
                         $valores[3]));
+            break;
+        }
+    }
+
+    function get(string $tabla, array $valores){
+        
+        switch (strtolower($tabla)) {
+            case "animes":
+                $obj = new ControladorAnimes();
+                $by = "get_".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1]
+                ));
+                break;
+            case "estados":
+                $obj = new ControladorEstados();
+                $by = "get_".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1],
+                    $valores[2]
+                ));
                 break;
         }
     }
@@ -86,7 +121,16 @@ class Backoffice{
                 ($obj->set(
                     $valores[0]
                 ));
-                break;
+            break;
+            case "estados":
+                $obj = new ControladorEstados();
+                return ($obj->set(
+                    $valores[0],
+                    $valores[1],
+                    $valores[2],
+                    $valores[3]
+                ));
+            break;
         }
     }
 }
