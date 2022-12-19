@@ -113,6 +113,9 @@ function boton() {
         case "Subir":
             SubirAnimes([nombre]);
         break;
+        case "Nuevo Capitulo":
+            SubirEstados([nombre, temporada, capitulo, estado]);
+        break;
         case "Borrar":
             BorrarAnimes([nombre]);
         break;
@@ -144,6 +147,7 @@ function tablaANIMEs(elemento, fila) {
 
         fila.addEventListener("click", (e)=>{
             $("#nombre").val(nombre.innerText);
+            $("#temporada").val(elemento.temporada);
             actualizarLista();
         });
 
