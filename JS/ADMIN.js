@@ -179,10 +179,6 @@ function tablaESTADOS(elemento, fila) {
         capitulo.appendChild(Pcapitulo);
         estado.appendChild(Pestado);
         
-        temporada.setAttribute("class", "contenedor");
-        capitulo.setAttribute("class", "contenedor");
-        estado.setAttribute("class", "contenedor");
-
         Ptemporada.setAttribute("class", "d-flex justify-content-center align-items-center");
         Pcapitulo.setAttribute("class", "d-flex justify-content-center align-items-center");
         Pestado.setAttribute("class", "d-flex justify-content-center align-items-center");

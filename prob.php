@@ -52,7 +52,7 @@ function atrToString(array $valoresATR){
     <button type="submit">Listar</button>
 </form>
 
-<form action="PHP/PROB/ANIME/BuscarNombre.php" method="post">
+<form action="PHP/PROB/ANIMES/BuscarNombre.php" method="post">
     <input type="text" name="nombre">
     <button type="submit">Buscar</button>
 </form>
