@@ -6,8 +6,8 @@ require_once "../../USER/Admin.php";
 
 
     if (($nombre!=NULL)) {
-        //$estado=$objUserAdmin->getEstadosByNombre($nombre);
-        //$objUserAdmin->borrarEstados($estado[0]["nombre"],$estado[0]["temporada"]);
+        $estado=$objUserAdmin->getEstados_nombre($nombre);
+        $objUserAdmin->borrarEstados($estado[0]["nombre"],$estado[0]["temporada"]);
         $objUserAdmin->borrarAnimes($nombre);
     }else{
         echo "Inicial: $nombre <br>";

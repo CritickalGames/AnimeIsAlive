@@ -24,6 +24,9 @@ class ControladorEstados extends ModeloEstados
     public function get_PK($valorClave1, $valorClave2){
         return $this->getEstados_PK($valorClave1, $valorClave2);
     }
+    public function get_nombre($valorColumna){
+        return $this->getEstados_nombre($valorColumna);
+    }
 ///////////////////Group
 ///////////////////Listar
     public function listar_nombre($valorColumnaDeCriterio){

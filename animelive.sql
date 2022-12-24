@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-12-2022 a las 08:35:19
+-- Tiempo de generación: 20-12-2022 a las 04:27:58
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `animes` (
-  `nombre` varchar(70) NOT NULL
+  `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -119,7 +119,7 @@ INSERT INTO `animes` (`nombre`) VALUES
 ('Kotoura-San'),
 ('Koutetsujou no Kabaneri'),
 ('Kumo Desu ga, Nani ka?'),
-('Kyuukyoku Shinka shita Full Dive RPG ga Genjitsu yori mo Kusoge Dattar'),
+('Kyuukyoku Shinka shita Full Dive RPG ga Genjitsu yori mo Kusoge Dattara'),
 ('Las Aventuras de Saint Tail'),
 ('Let\'s Play Phoenix Wright Justis For All'),
 ('Los últimos frikis del mundo'),
@@ -180,7 +180,8 @@ INSERT INTO `animes` (`nombre`) VALUES
 ('Yatogame-chan Kansatsu Nikki'),
 ('Yofukashi no uta'),
 ('Youjo senki'),
-('Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e');
+('Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e'),
+('Z');
 
 -- --------------------------------------------------------
 
@@ -202,11 +203,19 @@ CREATE TABLE `datos` (
 --
 
 CREATE TABLE `estados` (
-  `nombre` varchar(70) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `temporada` int(11) NOT NULL,
   `capitulo` int(11) DEFAULT NULL,
   `estado` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estados`
+--
+
+INSERT INTO `estados` (`nombre`, `temporada`, `capitulo`, `estado`) VALUES
+('Aharen san', 1, 12, 'visto'),
+('Kyuukyoku Shinka shita Full Dive RPG ga Genjitsu yori mo Kusoge Dattara', 1, 12, 'visto');
 
 -- --------------------------------------------------------
 
@@ -215,7 +224,7 @@ CREATE TABLE `estados` (
 --
 
 CREATE TABLE `portadas` (
-  `nombre` varchar(70) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `url` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -307,7 +316,7 @@ INSERT INTO `portadas` (`nombre`, `url`) VALUES
 ('Kotoura-San', 'https://cdn.myanimelist.net/images/anime/10/75585l.jpg'),
 ('Koutetsujou no Kabaneri', 'https://cdn.myanimelist.net/images/anime/4/77657l.jpg'),
 ('Kumo Desu ga, Nani ka?', 'https://cdn.myanimelist.net/images/manga/3/180081l.jpg'),
-('Kyuukyoku Shinka shita Full Dive RPG ga Genjitsu yori mo Kusoge Dattar', 'https://cdn.myanimelist.net/images/anime/1357/113277l.jpg'),
+('Kyuukyoku Shinka shita Full Dive RPG ga Genjitsu yori mo Kusoge Dattara', 'https://cdn.myanimelist.net/images/anime/1357/113277l.jpg'),
 ('Las Aventuras de Saint Tail', 'https://cdn.myanimelist.net/images/anime/1/2191l.jpg'),
 ('Let\'s Play Phoenix Wright Justis For All', 'https://wowroms-photos.com/emulators-roms-logo/36/19213/420-420/Phoenix+Wright+-+Ace+Attorney+-+Justice+for+All+(USA)-image.jpg'),
 ('Los últimos frikis del mundo', 'https://m.media-amazon.com/images/I/51Zf0US26+L._SX328_BO1,204,203,200_.jpg'),
@@ -398,7 +407,7 @@ INSERT INTO `usuarios` (`nombre`, `correo`, `contraseña`, `foto`) VALUES
 
 CREATE TABLE `usuario_sigue_anime` (
   `usuario` varchar(25) NOT NULL,
-  `nombre` varchar(70) NOT NULL
+  `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

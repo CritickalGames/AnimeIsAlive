@@ -22,6 +22,12 @@ const swPortadas= "PORTADAS";
         $sw= self::swAnimes;
         return $obj->borrar($sw,[$valorColumna]);
     }
+
+    function borrarEstados($valorClave1, $valorClave2){
+        $obj=new Backoffice();
+        $sw= self::swEstados;
+        return $obj->borrar($sw,[$valorClave1, $valorClave2]);
+    }
 ///////////////////Search
 ///////////////////Edit
     function editarEstados_Capitulo($valorClave1, $valorClave2, $valorColumna){
@@ -40,6 +46,11 @@ const swPortadas= "PORTADAS";
         $obj=new Backoffice();
         $sw= self::swEstados;
         return $obj->get($sw,["PK", $valorClave1, $valorClave2]);
+    }
+    function getEstados_nombre($valorColumna){
+        $obj=new Backoffice();
+        $sw= self::swEstados;
+        return $obj->get($sw,["nombre", $valorColumna, ""]);
     }
 ///////////////////Group
 ///////////////////Listar

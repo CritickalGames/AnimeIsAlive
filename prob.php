@@ -10,7 +10,6 @@ function atrToString(array $valoresATR){
     $valor="";
     foreach ($valoresATR as $key) {
       $valor= $key;
-      echo $key;
       if ($key!=count($valoresATR)-1 && count($valoresATR)!=1) {
         $clave = $clave."'$valor', ";
       }else {
@@ -41,8 +40,12 @@ function atrToString(array $valoresATR){
             VALUES ($valores)";
     return ($sql);
   }
-
-  echo "<br><br><br><br>".(sqlSet(["nombre", "temporada", "capitulo", "estado"], "a", "1", "2", "visto"))
+  echo "<br><br>";
+  $array=[
+    "nombre"=>"nombre"
+    ];
+    var_dump($array);
+  echo "<br><br>".(sqlSet(["nombre", "temporada", "capitulo", "estado"], "a", "1", "2", "visto"))
 
 ?>
 <br>///////////////////////////////////////////////////////

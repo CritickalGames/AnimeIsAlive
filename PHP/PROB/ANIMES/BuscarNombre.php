@@ -2,6 +2,14 @@
 require_once "../../USER/Admin.php";
     $objUserAdmin = new UserAdmin();
     $nombre = $_POST['nombre'];
+    $base=[
+        "nombre"=> "",
+        "url"=> "",
+        "temporada"=> "",
+        "capitulo"=> "",
+        "estado"=> "",
+    ];
+    $array=[];
     //$nombre = "Z";
     //$nombre = "a";
     if (($nombre!=NULL)) {
@@ -10,13 +18,14 @@ require_once "../../USER/Admin.php";
         $portadas=($objUserAdmin->listarPortadas_nombre($nombre));
 
         foreach ($animes as $key => $value) {
-            $array;
-            $array[$key]=$value;
+            array_push($array,$base);
+            $array[$key]["nombre"]=$value["nombre"];
             foreach ($portadas as $portadaK => $portadaV) {
                 
                 if ($portadaV) {
                     if (($value["nombre"]==$portadaV["nombre"])) {
-                        $array[$key]=$portadaV;
+                        $array[$key]["nombre"]=$portadaV["nombre"];
+                        $array[$key]["url"]=$portadaV["url"];
                     }else {
                     }
                 }
@@ -24,7 +33,9 @@ require_once "../../USER/Admin.php";
             foreach ($estados as $estadoK => $estadoV) {
                 if ($estadoV) {
                     if (($value["nombre"]==$estadoV["nombre"])) {
-                        $array[$key]=$estadoV;
+                        $array[$key]["temporada"]=$estadoV["temporada"];
+                        $array[$key]["capitulo"]=$estadoV["capitulo"];
+                        $array[$key]["estado"]=$estadoV["estado"];
                     }
                 }
             }
@@ -37,13 +48,15 @@ require_once "../../USER/Admin.php";
         $portadas=($objUserAdmin->listarPortadas_nombre("A"));
         
         foreach ($animes as $key => $value) {
-            $array;
-            $array[$key]=$value;
+            
+            array_push($array,$base);
+            $array[$key]["nombre"]=$value["nombre"];
             foreach ($portadas as $portadaK => $portadaV) {
                 
                 if ($portadaV) {
                     if (($value["nombre"]==$portadaV["nombre"])) {
-                        $array[$key]=$portadaV;
+                        $array[$key]["nombre"]=$portadaV["nombre"];
+                        $array[$key]["url"]=$portadaV["url"];
                     }else {
                     }
                 }
@@ -51,9 +64,10 @@ require_once "../../USER/Admin.php";
             foreach ($estados as $estadoK => $estadoV) {
                 if ($estadoV) {
                     if (($value["nombre"]==$estadoV["nombre"])) {
-                        $array[$key]=$estadoV;
+                        $array[$key]["temporada"]=$estadoV["temporada"];
+                        $array[$key]["capitulo"]=$estadoV["capitulo"];
+                        $array[$key]["estado"]=$estadoV["estado"];
                     }else {
-                        break;
                     }
                 }
             }

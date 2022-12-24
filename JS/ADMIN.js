@@ -3,6 +3,7 @@ window.addEventListener("load", main);
 
 function main() {
     select();
+    alert("main");
     
     document.getElementById("nombre")
         .addEventListener("keyup", actualizarLista);
@@ -26,6 +27,7 @@ function actualizarLista() {
     }
 }
 function select() {
+    alert("select");
     let select = $("#selector").val();
     let btn = $("#boton");
     btn.text(select);
@@ -104,6 +106,7 @@ function select() {
     actualizarLista();
 }
 function boton() {
+    alert("boton");
     let btn = $("#boton");
     let nombre = document.getElementById("nombre").value;
     let temporada = document.getElementById("temporada").value;
@@ -111,6 +114,7 @@ function boton() {
     let estado = document.getElementById("estado").value;
     switch (btn.text()) {
         case "Subir":
+            alert("subir, boton");
             SubirAnimes([nombre]);
         break;
         case "Nuevo Capitulo":
@@ -210,6 +214,8 @@ function celdaVacia(elemento, fila) {
         img.setAttribute("class", "portada rounded mx-auto d-block");
         vacio.setAttribute("class", "table-dark");
         vacio.appendChild(img);
+    }else{
+        alert(elemento.url);
     }
 }
 
@@ -287,11 +293,11 @@ function SubirAnimes(valores) {
         url:"PHP/PROB/ANIMES/Subir.php",
         data:{nombre:valores[0]},
         success:function(res){
-            //alert(res);
+            alert(res);
             actualizarLista();
         },
         error: function(res){
-            //alert(res);
+            alert(res);
         }
     });
 }

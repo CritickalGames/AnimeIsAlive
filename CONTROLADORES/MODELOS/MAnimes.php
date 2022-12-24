@@ -8,7 +8,7 @@ class ModeloAnimes extends ModeloConexion
 
     const tabla="animes";
     const nombreClave="nombre";
-    const nombreColumnas="nombre";
+    const nombreColumnas=["nombre"];
 
     public function setAnimes($valorClave){
         $tabla = self::tabla;
