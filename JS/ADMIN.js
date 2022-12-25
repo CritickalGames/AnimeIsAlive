@@ -130,6 +130,10 @@ function boton() {
 
 
 ///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 function tablaANIMEs(elemento, fila) {
     //alert("entra");
     let nombre = fila.insertCell();
@@ -201,27 +205,34 @@ function tablaOPINION(elemento, fila) {
         opinion.innerHTML="SIN CONFIGURAR";
     }
 }
-function celdaVacia(elemento, fila) {
+function celdaIMG(elemento, fila) {
     let vacio = fila.insertCell();
     let img = document.createElement("img");
-    if (elemento.url!=null) {
+    if (elemento.url!="") {
         let url= elemento.url
-        img.setAttribute("src", url);
-        img.setAttribute("class", "portada rounded mx-auto d-block");
-        vacio.setAttribute("class", "table-dark");
-        vacio.appendChild(img);
+        alert(elemento.archivo+"\n"+elemento.formato);
+        
+            url=url+elemento.archivo+elemento.formato;
+            img.setAttribute("src", url);
+            img.setAttribute("class", "portada rounded mx-auto d-block");
+            vacio.setAttribute("class", "table-dark");
+            vacio.appendChild(img);
     }else{
-        alert(elemento.url);
+        //alert(elemento.url);
     }
 }
 
 function tablaGeneral(elemento, fila){
-    celdaVacia(elemento, fila);
+    celdaIMG(elemento, fila);
     tablaANIMEs(elemento, fila);
     tablaESTADOS(elemento, fila);
     tablaOPINION(elemento, fila);
 }
 
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 function BorrarAnimes(valores) {
     $.ajax({
@@ -293,7 +304,7 @@ function SubirAnimes(valores) {
             actualizarLista();
         },
         error: function(res){
-            alert(res);
+            //alert(res);
         }
     });
 }

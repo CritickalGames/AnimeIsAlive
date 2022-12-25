@@ -5,6 +5,8 @@ require_once "../../USER/Admin.php";
     $base=[
         "nombre"=> "",
         "url"=> "",
+        "archivo"=> "",
+        "formato"=> "",
         "temporada"=> "",
         "capitulo"=> "",
         "estado"=> "",
@@ -25,8 +27,11 @@ require_once "../../USER/Admin.php";
                 if ($portadaV) {
                     if (($value["nombre"]==$portadaV["nombre"])) {
                         $array[$key]["nombre"]=$portadaV["nombre"];
-                        $array[$key]["url"]=$portadaV["url"];
-                    }else {
+                            $array[$key]["url"]=$portadaV["url"];
+                        if ($portadaV["archivo"]) {
+                            $array[$key]["archivo"]=$portadaV["archivo"];
+                            $array[$key]["formato"]=$portadaV["formato"];
+                        }
                     }
                 }
             }
@@ -57,6 +62,10 @@ require_once "../../USER/Admin.php";
                     if (($value["nombre"]==$portadaV["nombre"])) {
                         $array[$key]["nombre"]=$portadaV["nombre"];
                         $array[$key]["url"]=$portadaV["url"];
+                        if ($portadaV["archivo"]) {
+                            $array[$key]["archivo"]=$portadaV["archivo"];
+                            $array[$key]["formato"]=$portadaV["formato"];
+                        }
                     }else {
                     }
                 }
