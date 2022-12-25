@@ -184,7 +184,20 @@ INSERT INTO `animes` (`nombre`) VALUES
 ('Youjo senki'),
 ('Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e');
 
-
+--
+-- Disparadores `animes`
+--
+DELIMITER $$
+CREATE TRIGGER `setURL` AFTER INSERT ON `animes` FOR EACH ROW BEGIN
+  INSERT INTO portadas VALUES(
+      nombre = new.nombre,
+      url = "https://raw.githubusercontent.com/CritickalGames/img/main/",
+      archivo = new.nombre,
+      formato = NULL
+  );
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -273,7 +286,7 @@ INSERT INTO `portadas` (`nombre`, `url`, `archivo`, `formato`) VALUES
 ('Big Hero Six', 'https://www.ecartelera.com/carteles/1800/1834/', '004','.jpg'),
 ('Blends S', 'https://cdn.myanimelist.net/images/anime/6/', '88286l','.jpg'),
 ('Blood Lad', 'https://raw.githubusercontent.com/CritickalGames/img/main/', 'Blood Lad', '.jpg'),
-('Bo.jpgku Dake Ga Inai Machi', 'https://cdn.myanimelist.net/images/anime/10/', '77957l','.jpg'),
+('Boku Dake Ga Inai Machi', 'https://cdn.myanimelist.net/images/anime/10/', '77957l','.jpg'),
 ('Boku no Kanojo ga Majimesugiru Sho-bitch na Ken', 'https://cdn.myanimelist.net/images/anime/12/', '87623l','.jpg'),
 ('Bokutachi no Remake', 'https://cdn.myanimelist.net/images/anime/1871/', '118309l','.jpg'),
 ('Bokutachi wa Benkyou ga Dekinai', 'https://cdn.myanimelist.net/images/anime/1602/', '100510l','.jpg'),
@@ -526,4 +539,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
