@@ -9,12 +9,15 @@ class ControladorPortadas extends ModeloPortadas
         $this->setPortadas($valorColumna);
     }
 ///////////////////Borrar
-    public function borrar($valorColumna){
-        $this->borrarPortadas($valorColumna);
+    public function borrar($valorClave){
+        $this->borrarPortadas($valorClave);
     }
 ///////////////////Search
 ///////////////////Edit
 ///////////////////Get
+    public function get_nombre($valorColumna){
+        return $this->getPortadas_nombre($valorColumna);
+    }
 ///////////////////Group
 ///////////////////Listar
     public function listar_nombre($valorColumnaDeCriterio){

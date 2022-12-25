@@ -8,7 +8,7 @@ class ModeloPortadas extends ModeloConexion
 
     const tabla="portadas";
     const nombreClave="nombre";
-    const nombreColumnas="nombre";
+    const nombreColumnas=["nombre"];
 
     public function setPortadas($valorClave){
         $tabla = self::tabla;

@@ -210,8 +210,6 @@ function celdaIMG(elemento, fila) {
     let img = document.createElement("img");
     if (elemento.url!="") {
         let url= elemento.url
-        alert(elemento.archivo+"\n"+elemento.formato);
-        
             url=url+elemento.archivo+elemento.formato;
             img.setAttribute("src", url);
             img.setAttribute("class", "portada rounded mx-auto d-block");
@@ -240,7 +238,7 @@ function BorrarAnimes(valores) {
         url:"PHP/PROB/ANIMES/Borrar.php",
         data:{nombre:valores[0]},
         success:function(res){
-            //alert(res);
+            alert(res);
             $("#nombre").val($("#nombre").val().charAt(0));
                 actualizarLista();
             $("#nombre").val("");

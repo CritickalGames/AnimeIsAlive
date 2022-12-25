@@ -19,6 +19,11 @@ class Backoffice{
                         $valores[1]
                     );
             break;
+            case "portadas":
+                $obj = new ControladorPortadas();
+                $obj->borrar(
+                        $valores[0]);
+            break;
         }
     }
 
@@ -81,6 +86,13 @@ class Backoffice{
                 return ($obj->{$by}(
                     $valores[1],
                     $valores[2]
+                ));
+                break;
+            case "portadas":
+                $obj = new ControladorPortadas();
+                $by = "get_".$valores[0];
+                return ($obj->{$by}(
+                    $valores[1]
                 ));
                 break;
         }

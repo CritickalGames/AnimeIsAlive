@@ -17,16 +17,22 @@ const swPortadas= "PORTADAS";
         return $obj->subir($sw,[$valorClave1, $valorClave2, $valorColumna1, $valorColumna2]);
     }
 ///////////////////Borrar
-    function borrarAnimes($valorColumna){
+    function borrarAnimes($valorClave){
         $obj=new Backoffice();
         $sw= self::swAnimes;
-        return $obj->borrar($sw,[$valorColumna]);
+        return $obj->borrar($sw,[$valorClave]);
     }
 
     function borrarEstados($valorClave1, $valorClave2){
         $obj=new Backoffice();
         $sw= self::swEstados;
         return $obj->borrar($sw,[$valorClave1, $valorClave2]);
+    }
+
+    function borrarPortadas($valorClave){
+        $obj=new Backoffice();
+        $sw= self::swPortadas;
+        return $obj->borrar($sw,[$valorClave]);
     }
 ///////////////////Search
 ///////////////////Edit
@@ -51,6 +57,11 @@ const swPortadas= "PORTADAS";
         $obj=new Backoffice();
         $sw= self::swEstados;
         return $obj->get($sw,["nombre", $valorColumna, ""]);
+    }
+    function getPortadas_nombre($valorColumna){
+        $obj=new Backoffice();
+        $sw= self::swPortadas;
+        return $obj->get($sw,["nombre", $valorColumna]);
     }
 ///////////////////Group
 ///////////////////Listar
