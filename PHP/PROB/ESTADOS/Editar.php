@@ -1,5 +1,5 @@
 <?php
-require_once "../USER/Admin.php";
+require_once "../../USER/Admin.php";
     $obj = new UserAdmin();
 
     
@@ -13,8 +13,8 @@ require_once "../USER/Admin.php";
     $estado = $_POST['estado'];
 
     if (($nombre!= NULL)&&($temporada!= NULL)) {
-        if (($obj->getEstadosByNombre($nombre, $temporada))) {
-            echo ($obj->editarEstadosEstado($nombre, $temporada, $estado));
+        if (($obj->getEstados_ByPK($nombre, $temporada))) {
+            echo ($obj->editarEstados_Estado($nombre, $temporada, $estado));
         }else {
             echo "Algo salió mal";
         }

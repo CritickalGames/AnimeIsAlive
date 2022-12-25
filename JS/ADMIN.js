@@ -116,6 +116,9 @@ function boton() {
         case "Nuevo Capitulo":
             SubirEstados([nombre, temporada, capitulo, estado]);
         break;
+        case "Editar Estado":
+            EditarEstados([nombre, temporada, estado]);
+        break;
         case "Borrar":
             BorrarAnimes([nombre]);
         break;
@@ -264,6 +267,21 @@ function BuscarAnimesNombre(valores) {
                 let fila = tabla.insertRow();
                 tablaGeneral(elemento, fila);
             }  
+        },
+        error: function(res){
+            //alert(res);
+        }
+    });
+}
+
+function EditarEstados(valores) {
+    $.ajax({
+        type:"POST",
+        url:"PHP/PROB/ESTADOS/Editar.php",
+        data:{nombre:valores[0], temporada:valores[1], estado:valores[2]},
+        success:function(res){
+            //alert(res);
+            actualizarLista();
         },
         error: function(res){
             //alert(res);
