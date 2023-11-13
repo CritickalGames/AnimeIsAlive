@@ -3,7 +3,6 @@
 require_once "RControladores.php";
 
 class Backoffice{
-
     function borrar(string $tabla, array $valores){
         
         switch (strtolower($tabla)) {
